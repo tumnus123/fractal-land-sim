@@ -17,7 +17,7 @@ public class GameView extends SurfaceView
 	private GameLoopThread gameLoopThread;
 	private int x = 0;
 
-	private int xSpeed = 2;
+	private int xSpeed = 5;
 	
 	public GameView(Context context, AttributeSet attributeSet)
 	{

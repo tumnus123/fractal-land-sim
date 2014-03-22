@@ -8,10 +8,12 @@ import android.graphics.Color;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 import android.util.*;
+import android.graphics.*;
 
 public class GameView extends SurfaceView
 {
 	private Bitmap bmp;
+	private final Paint paint = new Paint(Paint.ANTI_ALIAS_FLAG);
 	private FractaLand al;
 	private SurfaceHolder holder;
 	private GameLoopThread gameLoopThread;
@@ -23,6 +25,9 @@ public class GameView extends SurfaceView
 	{
 		super(context, attributeSet);
 		gameLoopThread = new GameLoopThread(this);
+		paint.setColor(Color.WHITE);
+		paint.setStyle(Paint.Style.FILL);
+		
 		holder = getHolder();
 		holder.addCallback(new SurfaceHolder.Callback()
 		{	
@@ -79,5 +84,8 @@ public class GameView extends SurfaceView
 		canvas.drawBitmap(bmp, x, 10, null);
 		
 		// will want to pass AL here for drawing
+		float ctrX = canvas.getWidth() / 2f;
+		float ctrY = canvas.getHeight() / 2f;
+		canvas.drawLine(ctrX-10,ctrY-10,ctrX+x,ctrY,paint);
 	}
 }

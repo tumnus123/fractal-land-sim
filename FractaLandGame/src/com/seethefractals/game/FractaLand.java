@@ -42,7 +42,7 @@ public class FractaLand
 		this.iRadius = iRadius;
 		int i = (iRadius * 2) + 1;
 
-		// StepSize is the basic space between nodes
+		// Spacing is the basic space between nodes
 		this.iSpacing = iSpacing;
 
 		// create and initialize
@@ -72,17 +72,17 @@ public class FractaLand
 	}
 
 	public void setRadius(int iRadius) {
-		iRadius = iRadius;
+		this.iRadius = iRadius;
 	}
 	public int getRadius()
 	{
 		return iRadius;
 	}
 
-	public void setStepSize(int iStepSize) {
-		iSpacing = iStepSize;
+	public void setSpacing(int iSpacing) {
+		this.iSpacing = iSpacing;
 	}
-	public int getStepSize()
+	public int getSpacing()
 	{
 		return iSpacing;
 	}

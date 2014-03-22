@@ -17,7 +17,7 @@ public class GameView extends SurfaceView
 	private FractaLand al;
 	private SurfaceHolder holder;
 	private GameLoopThread gameLoopThread;
-	private int x = 0;
+	private int xPosBmp = 0;
 
 	private int xSpeed = 5;
 	
@@ -65,27 +65,41 @@ public class GameView extends SurfaceView
 		bmp = BitmapFactory.decodeResource(getResources(), R.drawable.ic_launcher);
 		//
 		// Build the AL here?
-		al = new FractaLand(10,3);
+		al = new FractaLand(2,10);
 	}
 	
 	@Override
 	protected void onDraw(Canvas canvas)
 	{
+		// called repeatedly, produces animation
 		canvas.drawColor(Color.BLACK);
+		
 		int iSpeed = xSpeed;
-		if (x == getWidth() - bmp.getWidth()) {
+		if (xPosBmp == getWidth() - bmp.getWidth()) {
 			iSpeed = xSpeed * -1;
 		}
-		if (x == 0) {
+		if (xPosBmp == 0) {
 			iSpeed = xSpeed;
 		}
-		x = x + iSpeed;
+		xPosBmp = xPosBmp + iSpeed;
 		
-		canvas.drawBitmap(bmp, x, 10, null);
+		canvas.drawBitmap(bmp, xPosBmp, 10, null);
 		
 		// will want to pass AL here for drawing
 		float ctrX = canvas.getWidth() / 2f;
 		float ctrY = canvas.getHeight() / 2f;
-		canvas.drawLine(ctrX-10,ctrY-10,ctrX+x,ctrY,paint);
+		
+		int r = al.getRadius();
+		int s = al.getSpacing();
+		for (int x=r*-1;x<=r;x++)
+		{
+			for (int y=r*-1;y<=r;y++)
+			{
+				paint.setColor(Color.WHITE);
+				float x1 = ctrX + (x*s);
+				float y1 = ctrY + (y*s);
+				canvas.drawLine(x1,y1,x1+1,y1+1,paint);
+			}
+		}	
 	}
 }

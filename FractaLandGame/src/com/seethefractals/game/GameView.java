@@ -9,6 +9,7 @@ import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 import android.util.*;
 import android.graphics.*;
+import android.widget.*;
 
 public class GameView extends SurfaceView
 {
@@ -27,6 +28,8 @@ public class GameView extends SurfaceView
 		gameLoopThread = new GameLoopThread(this);
 		paint.setColor(Color.WHITE);
 		paint.setStyle(Paint.Style.FILL);
+		
+		//EditText;
 		
 		holder = getHolder();
 		holder.addCallback(new SurfaceHolder.Callback()

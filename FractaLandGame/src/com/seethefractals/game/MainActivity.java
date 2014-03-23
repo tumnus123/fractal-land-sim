@@ -15,5 +15,6 @@ public class MainActivity extends Activity
         requestWindowFeature(Window.FEATURE_NO_TITLE);
 		//setContentView(new GameView(this));
 		setContentView(R.layout.main);
+		
     }
 }

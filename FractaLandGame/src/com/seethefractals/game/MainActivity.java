@@ -5,10 +5,13 @@ import android.os.*;
 import android.view.*;
 import android.widget.*;
 import android.view.View.*;
+import android.widget.SeekBar.*;
 
 public class MainActivity extends Activity
 {
     private FractaLand al;
+	private int iRadius;
+	private int iSpacing;
 	
 	/** Called when the activity is first created. */
     @Override
@@ -20,8 +23,11 @@ public class MainActivity extends Activity
 		
 		final GameView gv = (GameView) findViewById(R.id.vGame);
 		
-		EditText etRadius = (EditText) findViewById(R.id.etRadius);
-		final int iRadius = Integer.parseInt(etRadius.getText().toString());
+		final EditText etRadius = (EditText) findViewById(R.id.etRadius);
+		final EditText etSpacing = (EditText) findViewById(R.id.etSpacing);
+		
+		iRadius = Integer.parseInt(etRadius.getText().toString());
+		iSpacing = Integer.parseInt(etSpacing.getText().toString());
 		
 		Button btnUpdate = (Button) findViewById(R.id.btnUpdate);
 		btnUpdate.setOnClickListener(new OnClickListener(){
@@ -29,12 +35,59 @@ public class MainActivity extends Activity
 				@Override
 				public void onClick(View p1)
 				{
-						al = new FractaLand(iRadius,10);
-						gv.setAL(al);
+					iRadius = Integer.parseInt(etRadius.getText().toString());
+					iSpacing = Integer.parseInt(etSpacing.getText().toString());
+					al = new FractaLand(iRadius,iSpacing);
+					gv.setAL(al);
 				}
 				
 			
 		});
 		
+		SeekBar sbRadius = (SeekBar) findViewById(R.id.sbRadius);
+		sbRadius.setMax(50);
+		sbRadius.setProgress(0);
+		sbRadius.setOnSeekBarChangeListener(new OnSeekBarChangeListener(){
+				@Override
+                public void onProgressChanged(SeekBar seekBar, int progress,
+											  boolean fromUser) {
+                    progress = progress + 1;
+				    etRadius.setText(Integer.toString(progress));
+                    iRadius = progress;
+					al = new FractaLand(iRadius, iSpacing);
+					gv.setAL(al);
+                }
+
+                @Override
+                public void onStartTrackingTouch(SeekBar seekBar) {
+                }
+
+                @Override
+                public void onStopTrackingTouch(SeekBar seekBar) {
+                }
+		});
+		
+		SeekBar sbSpacing = (SeekBar) findViewById(R.id.sbSpacing);
+		sbSpacing.setMax(50);
+		sbSpacing.setProgress(0);
+		sbSpacing.setOnSeekBarChangeListener(new OnSeekBarChangeListener(){
+				@Override
+                public void onProgressChanged(SeekBar seekBar, int progress,
+											  boolean fromUser) {
+                    progress = progress + 2;
+				    etSpacing.setText(Integer.toString(progress));
+                    iSpacing = progress;
+					al = new FractaLand(iRadius, iSpacing);
+					gv.setAL(al);
+                }
+
+                @Override
+                public void onStartTrackingTouch(SeekBar seekBar) {
+                }
+
+                @Override
+                public void onStopTrackingTouch(SeekBar seekBar) {
+                }
+			});
     }
 }

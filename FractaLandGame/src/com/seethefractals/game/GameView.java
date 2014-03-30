@@ -45,7 +45,6 @@ public class GameView extends SurfaceView
 						}
 						catch (InterruptedException e)
 						{
-
 						}
 					}
 				}
@@ -64,8 +63,8 @@ public class GameView extends SurfaceView
 			});
 		bmp = BitmapFactory.decodeResource(getResources(), R.drawable.ic_launcher);
 		//
-		// Build the AL here?
-		al = new FractaLand(2, 10);
+		// Build the initial FL here
+		al = new FractaLand(1, 2);
 	}
 
 

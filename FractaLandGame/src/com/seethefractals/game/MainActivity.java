@@ -33,7 +33,7 @@ public class MainActivity extends Activity
 					al = new FractaLand(iRadius,10);
 					gv.setAL(al);
 					gv.startRunning();
-					gv.stopRunning();
+					//gv.stopRunning();
 				}
 				
 			

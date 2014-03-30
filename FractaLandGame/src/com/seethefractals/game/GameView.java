@@ -29,7 +29,7 @@ public class GameView extends SurfaceView
 		paint.setColor(Color.WHITE);
 		paint.setStyle(Paint.Style.FILL);
 		
-		EditText etRadius = (EditText) findViewById(R.id.etRadius);
+		//EditText etRadius = (EditText) findViewById(R.id.etRadius);
 		
 		//EditText etSpeed = (EditText) findViewById(R.id.etSpeed);
 		
@@ -59,8 +59,8 @@ public class GameView extends SurfaceView
 			@Override
 			public void surfaceCreated(SurfaceHolder holder)
 			{
-				gameLoopThread.setRunning(true);
-				gameLoopThread.start();
+				//gameLoopThread.setRunning(true);
+				//gameLoopThread.start();
 			}
 			
 			@Override

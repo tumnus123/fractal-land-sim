@@ -29,7 +29,10 @@ public class GameView extends SurfaceView
 		paint.setColor(Color.WHITE);
 		paint.setStyle(Paint.Style.FILL);
 		
-		//EditText;
+		EditText etRadius = (EditText) findViewById(R.id.etRadius);
+		
+		//EditText etSpeed = (EditText) findViewById(R.id.etSpeed);
+		
 		
 		holder = getHolder();
 		holder.addCallback(new SurfaceHolder.Callback()
@@ -70,6 +73,23 @@ public class GameView extends SurfaceView
 		// Build the AL here?
 		al = new FractaLand(2,10);
 	}
+
+	public void stopRunning()
+	{
+		gameLoopThread.setRunning(false);
+		gameLoopThread.stop();
+	}
+
+	public void startRunning()
+	{
+		gameLoopThread.setRunning(true);
+		gameLoopThread.start();
+	}
+	
+	public void setAL(FractaLand al)
+	{
+		this.al = al;
+	}
 	
 	@Override
 	protected void onDraw(Canvas canvas)
@@ -92,17 +112,17 @@ public class GameView extends SurfaceView
 		float ctrX = canvas.getWidth() / 2f;
 		float ctrY = canvas.getHeight() / 2f;
 		
-		int r = al.getRadius();
-		int s = al.getSpacing();
-		for (int x=r*-1;x<=r;x++)
-		{
-			for (int y=r*-1;y<=r;y++)
-			{
-				paint.setColor(Color.WHITE);
-				float x1 = ctrX + (x*s);
-				float y1 = ctrY + (y*s);
-				canvas.drawLine(x1,y1,x1+1,y1+1,paint);
-			}
-		}	
+//		int r = al.getRadius();
+//		int s = al.getSpacing();
+//		for (int x=r*-1;x<=r;x++)
+//		{
+//			for (int y=r*-1;y<=r;y++)
+//			{
+//				paint.setColor(Color.WHITE);
+//				float x1 = ctrX + (x*s);
+//				float y1 = ctrY + (y*s);
+//				canvas.drawLine(x1,y1,x1+1,y1+1,paint);
+//			}
+//		}	
 	}
 }

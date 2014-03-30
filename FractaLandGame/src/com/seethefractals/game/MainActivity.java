@@ -29,13 +29,8 @@ public class MainActivity extends Activity
 				@Override
 				public void onClick(View p1)
 				{
-					if (gv.getThread().isRunning()) {
-						gv.stopRunning();
-					} else {
 						al = new FractaLand(iRadius,10);
 						gv.setAL(al);
-						gv.startRunning();
-					}
 				}
 				
 			

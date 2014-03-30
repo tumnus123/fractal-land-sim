@@ -19,7 +19,6 @@ public class GameView extends SurfaceView
 	private SurfaceHolder holder;
 	private GameLoopThread gameLoopThread;
 	private int xPosBmp = 0;
-
 	private int xSpeed = 5;
 
 	public GameView(Context context, AttributeSet attributeSet)
@@ -28,11 +27,6 @@ public class GameView extends SurfaceView
 		gameLoopThread = new GameLoopThread(this);
 		paint.setColor(Color.WHITE);
 		paint.setStyle(Paint.Style.FILL);
-
-		//EditText etRadius = (EditText) findViewById(R.id.etRadius);
-
-		//EditText etSpeed = (EditText) findViewById(R.id.etSpeed);
-
 
 		holder = getHolder();
 		holder.addCallback(new SurfaceHolder.Callback()
@@ -59,8 +53,8 @@ public class GameView extends SurfaceView
 				@Override
 				public void surfaceCreated(SurfaceHolder holder)
 				{
-					//gameLoopThread.setRunning(true);
-					//gameLoopThread.start();
+					gameLoopThread.setRunning(true);
+					gameLoopThread.start();
 				}
 
 				@Override
@@ -74,35 +68,7 @@ public class GameView extends SurfaceView
 		al = new FractaLand(2, 10);
 	}
 
-	public void stopRunning()
-	{
-		//gameLoopThread.setRunning(false);
-		//gameLoopThread.stop();
-		boolean retry = true;
-		gameLoopThread.setRunning(false);
-		while (retry)
-		{
-			try
-			{
-				gameLoopThread.stop();
-				retry = false;
-			}
-			catch (InterruptedException e)
-			{
 
-			}
-		}
-	}
-
-	public void startRunning()
-	{
-		
-		if (!gameLoopThread.isRunning())
-		{
-			gameLoopThread.setRunning(true);
-			gameLoopThread.start();
-		}
-	}
 
 	public void setAL(FractaLand al)
 	{
@@ -133,21 +99,25 @@ public class GameView extends SurfaceView
 
 		canvas.drawBitmap(bmp, xPosBmp, 10, null);
 
-		// will want to pass AL here for drawing
-		float ctrX = canvas.getWidth() / 2f;
-		float ctrY = canvas.getHeight() / 2f;
+		drawAL(canvas, al);
+	}
 
-//		int r = al.getRadius();
-//		int s = al.getSpacing();
-//		for (int x=r*-1;x<=r;x++)
-//		{
-//			for (int y=r*-1;y<=r;y++)
-//			{
-//				paint.setColor(Color.WHITE);
-//				float x1 = ctrX + (x*s);
-//				float y1 = ctrY + (y*s);
-//				canvas.drawLine(x1,y1,x1+1,y1+1,paint);
-//			}
-//		}	
+	private void drawAL(Canvas c, FractaLand fl)
+	{
+		float ctrX = c.getWidth() / 2f;
+		float ctrY = c.getHeight() / 2f;
+
+		int r = al.getRadius();
+		int s = al.getSpacing();
+		for (int x=r * -1;x <= r;x++)
+		{
+			for (int y=r * -1;y <= r;y++)
+			{
+				paint.setColor(Color.WHITE);
+				float x1 = ctrX + (x * s);
+				float y1 = ctrY + (y * s);
+				c.drawLine(x1, y1, x1 + 1, y1 + 1, paint);
+			}
+		}	
 	}
 }

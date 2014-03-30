@@ -16,6 +16,11 @@ public class GameLoopThread extends Thread {
 		running = run;
 	}
 	
+	public boolean isRunning()
+	{
+		return running;
+	}
+	
 	@Override
 	public void run() {
 		long ticksPS = 1000 / FPS;

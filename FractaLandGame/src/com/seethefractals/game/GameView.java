@@ -64,7 +64,7 @@ public class GameView extends SurfaceView
 		bmp = BitmapFactory.decodeResource(getResources(), R.drawable.ic_launcher);
 		//
 		// Build the initial FL here
-		al = new FractaLand(1, 2);
+		al = new FractaLand(1, 2f);
 	}
 
 
@@ -96,8 +96,10 @@ public class GameView extends SurfaceView
 		}
 		xPosBmp = xPosBmp + iSpeed;
 
-		canvas.drawBitmap(bmp, xPosBmp, 10, null);
+		//canvas.drawBitmap(bmp, xPosBmp, 10, null);
 
+		// look to al for deltas?
+		
 		drawAL(canvas, al);
 	}
 
@@ -107,7 +109,7 @@ public class GameView extends SurfaceView
 		float ctrY = c.getHeight() / 2f;
 
 		int r = al.getRadius();
-		int s = al.getSpacing();
+		float s = al.getSpacing();
 		for (int x=r * -1;x <= r;x++)
 		{
 			for (int y=r * -1;y <= r;y++)

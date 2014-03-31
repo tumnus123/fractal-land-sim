@@ -11,7 +11,8 @@ public class MainActivity extends Activity
 {
     private FractaLand al;
 	private int iRadius;
-	private int iSpacing;
+	private float fSpacing;
+	//private int iMaxSpace;
 	
 	/** Called when the activity is first created. */
     @Override
@@ -27,17 +28,17 @@ public class MainActivity extends Activity
 		final EditText etSpacing = (EditText) findViewById(R.id.etSpacing);
 		
 		iRadius = Integer.parseInt(etRadius.getText().toString());
-		iSpacing = Integer.parseInt(etSpacing.getText().toString());
+		fSpacing = Float.parseFloat(etSpacing.getText().toString());
 		
-		Button btnUpdate = (Button) findViewById(R.id.btnUpdate);
+		Button btnUpdate = (Button) findViewById(R.id.btnDensify);
 		btnUpdate.setOnClickListener(new OnClickListener(){
 
 				@Override
 				public void onClick(View p1)
 				{
-					iRadius = Integer.parseInt(etRadius.getText().toString());
-					iSpacing = Integer.parseInt(etSpacing.getText().toString());
-					al = new FractaLand(iRadius,iSpacing);
+					fSpacing = fSpacing / 2;
+					iRadius = iRadius * 2;
+					al = new FractaLand(iRadius,fSpacing);
 					gv.setAL(al);
 				}
 				
@@ -54,7 +55,7 @@ public class MainActivity extends Activity
                     progress = progress + 1;
 				    etRadius.setText(Integer.toString(progress));
                     iRadius = progress;
-					al = new FractaLand(iRadius, iSpacing);
+					al = new FractaLand(iRadius, fSpacing);
 					gv.setAL(al);
                 }
 
@@ -76,8 +77,8 @@ public class MainActivity extends Activity
 											  boolean fromUser) {
                     progress = progress + 2;
 				    etSpacing.setText(Integer.toString(progress));
-                    iSpacing = progress;
-					al = new FractaLand(iRadius, iSpacing);
+                    fSpacing = progress;
+					al = new FractaLand(iRadius, fSpacing);
 					gv.setAL(al);
                 }
 
@@ -88,6 +89,19 @@ public class MainActivity extends Activity
                 @Override
                 public void onStopTrackingTouch(SeekBar seekBar) {
                 }
+			});
+			
+			Button btnMove = (Button) findViewById(R.id.btnMove);
+		btnMove.setOnClickListener(new OnClickListener(){
+
+				@Override
+				public void onClick(View p1)
+				{
+					// pass the start and end values in
+					
+				}
+				
+				
 			});
     }
 }

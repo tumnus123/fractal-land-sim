@@ -18,12 +18,12 @@
 			android:text="Spacing:"/>
 		<EditText
 			android:id="@+id/etSpacing"
-			android:layout_width="wrap_content"
+			android:layout_width="50dp"
 			android:layout_height="wrap_content"
 			android:text="2"/>
 		<SeekBar
 			android:id="@+id/sbSpacing"
-			android:layout_width="200dp"
+			android:layout_width="150dp"
 			android:layout_height="match_parent"
 		/>
 		<TextView
@@ -33,19 +33,19 @@
 			android:text="Radius:"/>
 		<EditText
 			android:id="@+id/etRadius"
-			android:layout_width="wrap_content"
+			android:layout_width="50dp"
 			android:layout_height="wrap_content"
 			android:text="1"/>
 		<SeekBar
 			android:id="@+id/sbRadius"
-			android:layout_width="200dp"
+			android:layout_width="150dp"
 			android:layout_height="match_parent"
 			/>
 		<Button
-			android:id="@+id/btnUpdate"
+			android:id="@+id/btnDensify"
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
-			android:text="Update" />
+			android:text="Densify" />
 
 	</LinearLayout>
 
@@ -62,9 +62,9 @@
 			android:text="Mag:"/>
 		<EditText
 			android:id="@+id/etMag"
-			android:layout_width="wrap_content"
+			android:layout_width="50dp"
 			android:layout_height="wrap_content"
-			android:text="2.0"/>
+			android:text="2"/>
 		<TextView
 			android:id="@+id/tvDir"
 			android:layout_width="wrap_content"
@@ -72,7 +72,7 @@
 			android:text="Dir:"/>
 		<EditText
 			android:id="@+id/etDir"
-			android:layout_width="wrap_content"
+			android:layout_width="50dp"
 			android:layout_height="wrap_content"
 			android:text="0"/>
 		<TextView
@@ -82,9 +82,9 @@
 			android:text="Dist:"/>
 		<EditText
 			android:id="@+id/etDist"
-			android:layout_width="wrap_content"
+			android:layout_width="50dp"
 			android:layout_height="wrap_content"
-			android:text="20"/>
+			android:text="0"/>
 		<Button
 			android:id="@+id/btnMove"
 			android:layout_width="wrap_content"

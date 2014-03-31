@@ -33,9 +33,9 @@ public class FractaLand
 
 	private ArrayList<ArrayList<Double>> al;
 	private int iRadius;
-	private int iSpacing;
+	private float fSpacing;
 
-	public FractaLand(int iRadius, int iSpacing)
+	public FractaLand(int iRadius, float fSpacing)
 	{
 		// AL must have a center node, so
 		// double radius and add one
@@ -43,7 +43,7 @@ public class FractaLand
 		int i = (iRadius * 2) + 1;
 
 		// Spacing is the basic space between nodes
-		this.iSpacing = iSpacing;
+		this.fSpacing = fSpacing;
 
 		// create and initialize
 		al = new ArrayList<ArrayList<Double>>(i);
@@ -80,11 +80,11 @@ public class FractaLand
 	}
 
 	public void setSpacing(int iSpacing) {
-		this.iSpacing = iSpacing;
+		this.fSpacing = iSpacing;
 	}
-	public int getSpacing()
+	public float getSpacing()
 	{
-		return iSpacing;
+		return fSpacing;
 	}
 
 }

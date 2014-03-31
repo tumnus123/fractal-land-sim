@@ -12,7 +12,8 @@ public class MainActivity extends Activity
     private FractaLand al;
 	private int iRadius;
 	private float fSpacing;
-	//private int iMaxSpace;
+	
+	private FracDelta fdMove;
 	
 	/** Called when the activity is first created. */
     @Override

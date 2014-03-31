@@ -98,7 +98,7 @@ public class GameView extends SurfaceView
 
 		//canvas.drawBitmap(bmp, xPosBmp, 10, null);
 
-		// look to al for deltas?
+		// 
 		
 		drawAL(canvas, al);
 	}

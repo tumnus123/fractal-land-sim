@@ -54,6 +54,10 @@ public class FractaLand
 			al.add(col);
 		}
 	}
+	
+	public void moveTo(float distX, float distY, double distMag){
+		
+	}
 
 	public Double getXY(int x, int y)
 	{
@@ -72,6 +76,7 @@ public class FractaLand
 	}
 
 	public void setRadius(int iRadius) {
+		//TODO: make private
 		this.iRadius = iRadius;
 	}
 	public int getRadius()
@@ -80,6 +85,7 @@ public class FractaLand
 	}
 
 	public void setSpacing(int iSpacing) {
+		//TODO: make private
 		this.fSpacing = iSpacing;
 	}
 	public float getSpacing()

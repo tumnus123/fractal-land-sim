@@ -2,6 +2,7 @@ package com.seethefractals.game;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import android.graphics.*;
 
 /**
   * @author tumnus123
@@ -34,15 +35,19 @@ public class FractaLand
 	private ArrayList<ArrayList<Double>> al;
 	private int iRadius;
 	private float fSpacing;
+	private final Paint paint = new Paint(Paint.ANTI_ALIAS_FLAG);
 
 	public FractaLand(int iRadius, float fSpacing)
 	{
+		paint.setColor(Color.WHITE);
+		paint.setStyle(Paint.Style.FILL);
+		
 		// AL must have a center node, so
 		// double radius and add one
 		this.iRadius = iRadius;
 		int i = (iRadius * 2) + 1;
 
-		// Spacing is the basic space between nodes
+		// Spacing is the screen space between nodes
 		this.fSpacing = fSpacing;
 
 		// create and initialize
@@ -57,6 +62,23 @@ public class FractaLand
 	
 	public void moveTo(float distX, float distY, double distMag){
 		
+	}
+	
+	public void draw(Canvas c) {
+		c.drawColor(Color.BLACK);
+		float ctrX = c.getWidth() / 2f;
+		float ctrY = c.getHeight() / 2f;
+
+		for (int x=iRadius * -1;x <= iRadius;x++)
+		{
+			for (int y=iRadius * -1;y <= iRadius;y++)
+			{
+				paint.setColor(Color.WHITE);
+				float x1 = ctrX + (x * fSpacing);
+				float y1 = ctrY + (y * fSpacing);
+				c.drawLine(x1, y1, x1 + 1, y1 + 1, paint);
+			}
+		}
 	}
 
 	public Double getXY(int x, int y)
@@ -84,9 +106,9 @@ public class FractaLand
 		return iRadius;
 	}
 
-	public void setSpacing(int iSpacing) {
+	public void setSpacing(float fSpacing) {
 		//TODO: make private
-		this.fSpacing = iSpacing;
+		this.fSpacing = fSpacing;
 	}
 	public float getSpacing()
 	{

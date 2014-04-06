@@ -25,6 +25,8 @@ public class MainActivity extends Activity
 		
 		final GameView gv = (GameView) findViewById(R.id.vGame);
 		
+		final FractaLand fl = gv.getFractaLand();
+		
 		final EditText etRadius = (EditText) findViewById(R.id.etRadius);
 		final EditText etSpacing = (EditText) findViewById(R.id.etSpacing);
 		
@@ -37,10 +39,8 @@ public class MainActivity extends Activity
 				@Override
 				public void onClick(View p1)
 				{
-					fSpacing = fSpacing / 2;
-					iRadius = iRadius * 2;
-					al = new FractaLand(iRadius,fSpacing);
-					gv.setAL(al);
+					fl.setRadius(fl.getRadius()*2);
+					fl.setSpacing(fl.getSpacing()/2);
 				}
 				
 			
@@ -55,9 +55,8 @@ public class MainActivity extends Activity
 											  boolean fromUser) {
                     progress = progress + 1;
 				    etRadius.setText(Integer.toString(progress));
-                    iRadius = progress;
-					al = new FractaLand(iRadius, fSpacing);
-					gv.setAL(al);
+                    fl.setRadius(progress);
+					iRadius = progress;
                 }
 
                 @Override
@@ -78,9 +77,7 @@ public class MainActivity extends Activity
 											  boolean fromUser) {
                     progress = progress + 2;
 				    etSpacing.setText(Integer.toString(progress));
-                    fSpacing = progress;
-					al = new FractaLand(iRadius, fSpacing);
-					gv.setAL(al);
+                    fl.setSpacing(progress);
                 }
 
                 @Override

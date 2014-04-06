@@ -15,7 +15,7 @@ public class GameView extends SurfaceView
 {
 	private Bitmap bmp;
 	private final Paint paint = new Paint(Paint.ANTI_ALIAS_FLAG);
-	private FractaLand al;
+	private FractaLand fl;
 	private SurfaceHolder holder;
 	private GameLoopThread gameLoopThread;
 	private int xPosBmp = 0;
@@ -25,8 +25,6 @@ public class GameView extends SurfaceView
 	{
 		super(context, attributeSet);
 		gameLoopThread = new GameLoopThread(this);
-		paint.setColor(Color.WHITE);
-		paint.setStyle(Paint.Style.FILL);
 
 		holder = getHolder();
 		holder.addCallback(new SurfaceHolder.Callback()
@@ -61,19 +59,25 @@ public class GameView extends SurfaceView
 				{
 				}
 			});
-		bmp = BitmapFactory.decodeResource(getResources(), R.drawable.ic_launcher);
+//		bmp = BitmapFactory.decodeResource(getResources(), R.drawable.ic_launcher);
 		//
 		// Build the initial FL here
-		al = new FractaLand(1, 2f);
+		fl = new FractaLand(1, 2f);
 	}
 
-
-
-	public void setAL(FractaLand al)
+	public FractaLand getFractaLand()
 	{
-		this.al = al;
+		// TODO: Implement this method
+		return this.fl;
 	}
 
+
+
+//	public void setAL(FractaLand fl)
+//	{
+//		this.fl = fl;
+//	}
+//
 	public GameLoopThread getThread()
 	{
 		return gameLoopThread;
@@ -83,42 +87,7 @@ public class GameView extends SurfaceView
 	protected void onDraw(Canvas canvas)
 	{
 		// called repeatedly, produces animation
-		canvas.drawColor(Color.BLACK);
-
-		int iSpeed = xSpeed;
-		if (xPosBmp == getWidth() - bmp.getWidth())
-		{
-			iSpeed = xSpeed * -1;
-		}
-		if (xPosBmp == 0)
-		{
-			iSpeed = xSpeed;
-		}
-		xPosBmp = xPosBmp + iSpeed;
-
-		//canvas.drawBitmap(bmp, xPosBmp, 10, null);
-
-		// 
-		
-		drawAL(canvas, al);
+		fl.draw(canvas);
 	}
 
-	private void drawAL(Canvas c, FractaLand fl)
-	{
-		float ctrX = c.getWidth() / 2f;
-		float ctrY = c.getHeight() / 2f;
-
-		int r = al.getRadius();
-		float s = al.getSpacing();
-		for (int x=r * -1;x <= r;x++)
-		{
-			for (int y=r * -1;y <= r;y++)
-			{
-				paint.setColor(Color.WHITE);
-				float x1 = ctrX + (x * s);
-				float y1 = ctrY + (y * s);
-				c.drawLine(x1, y1, x1 + 1, y1 + 1, paint);
-			}
-		}	
-	}
 }

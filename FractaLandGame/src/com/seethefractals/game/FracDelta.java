@@ -17,7 +17,7 @@ public class FracDelta
 	
 	public void animate(){
 		// works... but how to control speed? check tutorial...
-		fl = new FractaLand(1,50f);
-		gv.setAL(fl);
+		// fl = new FractaLand(1,50f);
+		// gv.setAL(fl);
 	}
 }

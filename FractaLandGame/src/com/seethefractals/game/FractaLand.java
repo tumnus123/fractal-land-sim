@@ -81,9 +81,44 @@ public class FractaLand
 			fIncrement = fDeltaX*0.1f*fSpeedXY;
 			fDeltaX=fDeltaX-fIncrement;
 			fOffsetX=fOffsetX+fIncrement;
-		} else {
-			
+			adjustFLX();
 		}
+	}
+
+	private void adjustFLX()
+	{
+		if(Math.abs(fOffsetX)>=fSpacing){
+			shiftColumns();
+		}
+	}
+
+	private void shiftColumns()
+	{
+		String addOnSide = "";
+		String remOnSide = "";
+		if(fOffsetX>0f){
+			addColumn("east");
+			fOffsetX-=fSpacing;
+		} else {
+			addColumn("west");
+			fOffsetX+=fSpacing;
+		}
+	}
+
+	private void addColumn(String addOnSide)
+	{
+		if(addOnSide.equals("west")){
+			ArrayList<Double> col = 
+				new ArrayList<Double>(Collections.nCopies(al.size(), 0.0));
+			al.add(col);
+			al.remove(al.size()-1);
+		} else {
+			ArrayList<Double> col = 
+				new ArrayList<Double>(Collections.nCopies(al.size(), 0.0));
+			al.add(al.size()-1,col);
+			al.remove(0);
+		}
+		
 	}
 	
 	public void draw(Canvas c) {

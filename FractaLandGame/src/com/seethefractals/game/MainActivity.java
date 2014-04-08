@@ -13,8 +13,6 @@ public class MainActivity extends Activity
 	private int iRadius;
 	private float fSpacing;
 	
-	private FracDelta fdMove;
-	
 	/** Called when the activity is first created. */
     @Override
     public void onCreate(Bundle savedInstanceState)

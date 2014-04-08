@@ -71,20 +71,23 @@ public class FractaLand
 	}
 	
 	public void moveTo(float fDeltaX, float fDeltaY, double fDeltaMag){
-		fOffsetX+=fDeltaX;
-		fOffsetY+=fDeltaY;
+		this.fDeltaX = fDeltaX;
+		this.fDeltaY = fDeltaY;
 	}
 	
 	public void update() {
+		float fIncrement = 0f;
 		if(Math.abs(fDeltaX)>0f){
-			fDeltaX+=fSpeedXY;
-			fOffsetX+=fSpeedXY;
+			fIncrement = fDeltaX*0.1f*fSpeedXY;
+			fDeltaX=fDeltaX-fIncrement;
+			fOffsetX=fOffsetX+fIncrement;
 		} else {
 			
 		}
 	}
 	
 	public void draw(Canvas c) {
+		update();
 		c.drawColor(Color.BLACK);
 		float ctrX = c.getWidth() / 2f;
 		float ctrY = c.getHeight() / 2f;

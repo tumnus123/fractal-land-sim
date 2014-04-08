@@ -95,8 +95,7 @@ public class MainActivity extends Activity
 				@Override
 				public void onClick(View p1)
 				{
-					FracDelta fd = new FracDelta(al,1f,1f,1f,gv);
-					fd.animate();
+					fl.moveTo(10f,0f,0f);
 					
 				}
 				

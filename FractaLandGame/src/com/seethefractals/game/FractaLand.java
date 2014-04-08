@@ -35,6 +35,11 @@ public class FractaLand
 	private ArrayList<ArrayList<Double>> al;
 	private int iRadius;
 	private float fSpacing;
+	private float fOffsetX;
+	private float fOffsetY;
+	private float fDeltaX;
+	private float fDeltaY;
+	private float fSpeedXY;
 	private final Paint paint = new Paint(Paint.ANTI_ALIAS_FLAG);
 
 	public FractaLand(int iRadius, float fSpacing)
@@ -58,10 +63,25 @@ public class FractaLand
 				new ArrayList<Double>(Collections.nCopies(i, 0.0));
 			al.add(col);
 		}
+		
+		// init offsets
+		fOffsetX = 0f;
+		fOffsetY = 0f;
+		fSpeedXY = 1f;
 	}
 	
-	public void moveTo(float distX, float distY, double distMag){
-		
+	public void moveTo(float fDeltaX, float fDeltaY, double fDeltaMag){
+		fOffsetX+=fDeltaX;
+		fOffsetY+=fDeltaY;
+	}
+	
+	public void update() {
+		if(Math.abs(fDeltaX)>0f){
+			fDeltaX+=fSpeedXY;
+			fOffsetX+=fSpeedXY;
+		} else {
+			
+		}
 	}
 	
 	public void draw(Canvas c) {
@@ -74,8 +94,8 @@ public class FractaLand
 			for (int y=iRadius * -1;y <= iRadius;y++)
 			{
 				paint.setColor(Color.WHITE);
-				float x1 = ctrX + (x * fSpacing);
-				float y1 = ctrY + (y * fSpacing);
+				float x1 = ctrX + (x * fSpacing) + fOffsetX;
+				float y1 = ctrY + (y * fSpacing) + fOffsetY;
 				c.drawLine(x1, y1, x1 + 1, y1 + 1, paint);
 			}
 		}

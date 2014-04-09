@@ -9,9 +9,21 @@ import android.widget.SeekBar.*;
 
 public class MainActivity extends Activity
 {
-    private FractaLand al;
+    private GameView gv;
+	EditText etDist;
+	SeekBar sbDist;
 	private int iRadius;
 	private float fSpacing;
+	private float fMoveDist;
+	
+	
+	@Override
+	public void onDestroy(){
+		// clean up
+		gv.destroyDrawingCache();
+		this.finish();
+		
+	}
 	
 	/** Called when the activity is first created. */
     @Override
@@ -21,15 +33,17 @@ public class MainActivity extends Activity
         requestWindowFeature(Window.FEATURE_NO_TITLE);
 		setContentView(R.layout.main);
 		
-		final GameView gv = (GameView) findViewById(R.id.vGame);
+		gv = (GameView) findViewById(R.id.vGame);
 		
 		final FractaLand fl = gv.getFractaLand();
 		
 		final EditText etRadius = (EditText) findViewById(R.id.etRadius);
 		final EditText etSpacing = (EditText) findViewById(R.id.etSpacing);
+		etDist = (EditText) findViewById(R.id.etDist);
 		
 		iRadius = Integer.parseInt(etRadius.getText().toString());
 		fSpacing = Float.parseFloat(etSpacing.getText().toString());
+		fMoveDist = Float.parseFloat(etDist.getText().toString());
 		
 		Button btnUpdate = (Button) findViewById(R.id.btnDensify);
 		btnUpdate.setOnClickListener(new OnClickListener(){
@@ -86,6 +100,29 @@ public class MainActivity extends Activity
                 public void onStopTrackingTouch(SeekBar seekBar) {
                 }
 			});
+		
+		sbDist = (SeekBar) findViewById(R.id.sbDist);
+		sbDist.setMax(50);
+		
+		sbDist.setProgress(0);
+		sbDist.setOnSeekBarChangeListener(new OnSeekBarChangeListener(){
+				@Override
+                public void onProgressChanged(SeekBar seekBar, int progress,
+											  boolean fromUser) {
+                    progress = progress + 1;
+				    etDist.setText(Float.toString(progress));
+                    //fl.setRadius(progress);
+					fMoveDist = Float.parseFloat(progress+"");
+                }
+
+                @Override
+                public void onStartTrackingTouch(SeekBar seekBar) {
+                }
+
+                @Override
+                public void onStopTrackingTouch(SeekBar seekBar) {
+                }
+			});
 			
 			Button btnMove = (Button) findViewById(R.id.btnMove);
 		btnMove.setOnClickListener(new OnClickListener(){
@@ -93,11 +130,16 @@ public class MainActivity extends Activity
 				@Override
 				public void onClick(View p1)
 				{
-					fl.moveTo(10f,0f,0f);
+					makeToast(sbDist.getProgress() + "");
+					fl.moveTo((sbDist.getProgress())*-1,0f,0f); // TEST
 					
 				}
 				
 				
 			});
     }
+	
+	private void makeToast(String msg){
+		Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();
+	}
 }

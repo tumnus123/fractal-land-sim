@@ -13,13 +13,9 @@ import android.widget.*;
 
 public class GameView extends SurfaceView
 {
-	private Bitmap bmp;
-	private final Paint paint = new Paint(Paint.ANTI_ALIAS_FLAG);
 	private FractaLand fl;
 	private SurfaceHolder holder;
 	private GameLoopThread gameLoopThread;
-	private int xPosBmp = 0;
-	private int xSpeed = 5;
 
 	public GameView(Context context, AttributeSet attributeSet)
 	{
@@ -59,25 +55,16 @@ public class GameView extends SurfaceView
 				{
 				}
 			});
-//		bmp = BitmapFactory.decodeResource(getResources(), R.drawable.ic_launcher);
-		//
+
 		// Build the initial FL here
 		fl = new FractaLand(1, 2f);
 	}
 
 	public FractaLand getFractaLand()
 	{
-		// TODO: Implement this method
 		return this.fl;
 	}
 
-
-
-//	public void setAL(FractaLand fl)
-//	{
-//		this.fl = fl;
-//	}
-//
 	public GameLoopThread getThread()
 	{
 		return gameLoopThread;

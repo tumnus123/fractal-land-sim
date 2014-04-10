@@ -78,10 +78,16 @@ public class FractaLand
 	public void update() {
 		float fIncrement = 0f;
 		if(Math.abs(fDeltaX)>0f){
-			fIncrement = fDeltaX*0.1f*fSpeedXY;
+			fIncrement = fDeltaX*0.1f*fSpeedXY; // revise?
 			fDeltaX=fDeltaX-fIncrement;
 			fOffsetX=fOffsetX+fIncrement;
 			adjustFLX();
+		}
+		if(Math.abs(fDeltaY)>0f){
+			fIncrement = fDeltaY*0.1f*fSpeedXY; // revise?
+			fDeltaY=fDeltaY-fIncrement;
+			fOffsetY=fOffsetY+fIncrement;
+			adjustFLY();
 		}
 	}
 
@@ -92,10 +98,26 @@ public class FractaLand
 		}
 	}
 
+	private void adjustFLY()
+	{
+		if(Math.abs(fOffsetY)>=fSpacing){
+			shiftRows();
+		}
+	}
+
+	private void shiftRows()
+	{
+		if(fOffsetY>0f){
+			addRow("north");
+			fOffsetY-=fSpacing;
+		} else {
+			addRow("south");
+			fOffsetX+=fSpacing;
+		}
+	}
+	
 	private void shiftColumns()
 	{
-		String addOnSide = "";
-		String remOnSide = "";
 		if(fOffsetX>0f){
 			addColumn("east");
 			fOffsetX-=fSpacing;
@@ -105,6 +127,24 @@ public class FractaLand
 		}
 	}
 
+	private void addRow(String addOnSide)
+	{
+		ArrayList<Double> thisAL;
+		if(addOnSide.equals("north")){
+			for(int i=0;i<al.size();i++) {
+				thisAL = al.get(i);
+				thisAL.add(0.0);
+				thisAL.remove(thisAL.size()-1);
+			}
+		} else {
+			for(int i=0;i<al.size();i++) {
+				thisAL = al.get(i);
+				thisAL.add(thisAL.size()-1,0.0);
+				thisAL.remove(0);
+			}
+		}
+	}
+	
 	private void addColumn(String addOnSide)
 	{
 		if(addOnSide.equals("west")){

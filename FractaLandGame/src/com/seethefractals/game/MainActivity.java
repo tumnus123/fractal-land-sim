@@ -10,12 +10,14 @@ import android.widget.SeekBar.*;
 public class MainActivity extends Activity
 {
     private GameView gv;
-	EditText etDistX;
-	SeekBar sbDistX;
+	private EditText etDistX;
+	private SeekBar sbDistX;
+	private float fMoveDistX;
+	private EditText etDistY;
+	private SeekBar sbDistY;
+	private float fMoveDistY;
 	private int iRadius;
 	private float fSpacing;
-	private float fMoveDistX;
-	
 	
 	@Override
 	public void onDestroy(){
@@ -104,7 +106,6 @@ public class MainActivity extends Activity
 		etDistX.setText(fMoveDistX+"");
 		sbDistX = (SeekBar) findViewById(R.id.sbDistX);
 		sbDistX.setMax(100);
-		
 		sbDistX.setProgress(50);
 		sbDistX.setOnSeekBarChangeListener(new OnSeekBarChangeListener(){
 				@Override
@@ -125,14 +126,40 @@ public class MainActivity extends Activity
                 }
 			});
 			
+		etDistY = (EditText) findViewById(R.id.etDistY);
+		fMoveDistY = Float.parseFloat(etDistY.getText().toString());
+		etDistY.setText(fMoveDistY+"");
+		sbDistY = (SeekBar) findViewById(R.id.sbDistY);
+		sbDistY.setMax(100);
+		sbDistY.setProgress(50);
+		sbDistY.setOnSeekBarChangeListener(new OnSeekBarChangeListener(){
+				@Override
+                public void onProgressChanged(SeekBar seekBar, int progress,
+											  boolean fromUser) {
+                    progress = progress - 50;
+				    etDistY.setText(Float.toString(progress));
+                    //fl.setRadius(progress);
+					fMoveDistY = Float.parseFloat(etDistY.getText().toString());
+                }
+
+                @Override
+                public void onStartTrackingTouch(SeekBar seekBar) {
+                }
+
+                @Override
+                public void onStopTrackingTouch(SeekBar seekBar) {
+                }
+			});
+		
+			
 			Button btnMove = (Button) findViewById(R.id.btnMove);
 		btnMove.setOnClickListener(new OnClickListener(){
 
 				@Override
 				public void onClick(View p1)
 				{
-					makeToast(fMoveDistX + "");
-					fl.moveTo(fMoveDistX,0f,0f); // TEST
+					makeToast(fMoveDistY + "");
+					fl.moveTo(fMoveDistX,fMoveDistY,0f); // TEST
 					
 				}
 				

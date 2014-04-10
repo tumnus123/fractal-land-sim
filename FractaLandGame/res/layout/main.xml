@@ -83,12 +83,12 @@
 			android:layout_height="match_parent"
 			android:text="Dist:"/>
 		<EditText
-			android:id="@+id/etDist"
+			android:id="@+id/etDistX"
 			android:layout_width="80dp"
 			android:layout_height="wrap_content"
 			android:text="20"/>
 		<SeekBar
-			android:id="@+id/sbDist"
+			android:id="@+id/sbDistX"
 			android:layout_width="150dp"
 			android:layout_height="match_parent"
 		/>

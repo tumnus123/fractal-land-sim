@@ -10,11 +10,11 @@ import android.widget.SeekBar.*;
 public class MainActivity extends Activity
 {
     private GameView gv;
-	EditText etDist;
-	SeekBar sbDist;
+	EditText etDistX;
+	SeekBar sbDistX;
 	private int iRadius;
 	private float fSpacing;
-	private float fMoveDist;
+	private float fMoveDistX;
 	
 	
 	@Override
@@ -39,12 +39,10 @@ public class MainActivity extends Activity
 		
 		final EditText etRadius = (EditText) findViewById(R.id.etRadius);
 		final EditText etSpacing = (EditText) findViewById(R.id.etSpacing);
-		etDist = (EditText) findViewById(R.id.etDist);
 		
 		iRadius = Integer.parseInt(etRadius.getText().toString());
 		fSpacing = Float.parseFloat(etSpacing.getText().toString());
-		fMoveDist = Float.parseFloat(etDist.getText().toString());
-		
+				
 		Button btnUpdate = (Button) findViewById(R.id.btnDensify);
 		btnUpdate.setOnClickListener(new OnClickListener(){
 
@@ -101,18 +99,21 @@ public class MainActivity extends Activity
                 }
 			});
 		
-		sbDist = (SeekBar) findViewById(R.id.sbDist);
-		sbDist.setMax(50);
+		etDistX = (EditText) findViewById(R.id.etDistX);
+		fMoveDistX = Float.parseFloat(etDistX.getText().toString());
+		etDistX.setText(fMoveDistX+"");
+		sbDistX = (SeekBar) findViewById(R.id.sbDistX);
+		sbDistX.setMax(100);
 		
-		sbDist.setProgress(0);
-		sbDist.setOnSeekBarChangeListener(new OnSeekBarChangeListener(){
+		sbDistX.setProgress(50);
+		sbDistX.setOnSeekBarChangeListener(new OnSeekBarChangeListener(){
 				@Override
                 public void onProgressChanged(SeekBar seekBar, int progress,
 											  boolean fromUser) {
-                    progress = progress + 1;
-				    etDist.setText(Float.toString(progress));
+                    progress = progress - 50;
+				    etDistX.setText(Float.toString(progress));
                     //fl.setRadius(progress);
-					fMoveDist = Float.parseFloat(progress+"");
+					fMoveDistX = Float.parseFloat(etDistX.getText().toString());
                 }
 
                 @Override
@@ -130,8 +131,8 @@ public class MainActivity extends Activity
 				@Override
 				public void onClick(View p1)
 				{
-					makeToast(sbDist.getProgress() + "");
-					fl.moveTo((sbDist.getProgress())*-1,0f,0f); // TEST
+					makeToast(fMoveDistX + "");
+					fl.moveTo(fMoveDistX,0f,0f); // TEST
 					
 				}
 				

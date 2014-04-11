@@ -57,7 +57,7 @@ public class GameView extends SurfaceView
 			});
 
 		// Build the initial FL here
-		fl = new FractaLand(1, 2f);
+		fl = new FractaLand(5, 5f);
 	}
 
 	public FractaLand getFractaLand()

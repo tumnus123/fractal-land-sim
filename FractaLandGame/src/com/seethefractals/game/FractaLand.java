@@ -112,7 +112,7 @@ public class FractaLand
 			fOffsetY-=fSpacing;
 		} else {
 			addRow("south");
-			fOffsetX+=fSpacing;
+			fOffsetY+=fSpacing;
 		}
 	}
 	

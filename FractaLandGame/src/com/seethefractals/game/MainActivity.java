@@ -9,13 +9,17 @@ import android.widget.SeekBar.*;
 
 public class MainActivity extends Activity
 {
-    private GameView gv;
-	private EditText etDistX;
+    private EditText etDistX;
 	private SeekBar sbDistX;
 	private float fMoveDistX;
 	private EditText etDistY;
 	private SeekBar sbDistY;
 	private float fMoveDistY;
+	private EditText etMag;
+	private SeekBar sbMag;
+	private float fMoveMag;
+	
+	private GameView gv;
 	private int iRadius;
 	private float fSpacing;
 	
@@ -101,6 +105,33 @@ public class MainActivity extends Activity
                 }
 			});
 		
+		etMag = (EditText) findViewById(R.id.etMag);
+		fMoveMag = Float.parseFloat(etMag.getText().toString());
+		etMag.setText(fMoveMag+"");
+		sbMag = (SeekBar) findViewById(R.id.sbMag);
+		sbMag.setMax(200);
+		sbMag.setProgress(100);
+		sbMag.setOnSeekBarChangeListener(new OnSeekBarChangeListener(){
+				@Override
+                public void onProgressChanged(SeekBar seekBar, int progress,
+											  boolean fromUser) {
+                    Float fProgress = progress * 1f;
+					fProgress = fProgress - 49.99f;
+					// mag range is 0.5 to 2.0
+					fProgress = fProgress / 50f; 
+				    etMag.setText(Float.toString(fProgress).substring(0,4));
+                    fMoveMag = Float.parseFloat(etMag.getText().toString());
+                }
+
+                @Override
+                public void onStartTrackingTouch(SeekBar seekBar) {
+                }
+
+                @Override
+                public void onStopTrackingTouch(SeekBar seekBar) {
+                }
+			});
+			
 		etDistX = (EditText) findViewById(R.id.etDistX);
 		fMoveDistX = Float.parseFloat(etDistX.getText().toString());
 		etDistX.setText(fMoveDistX+"");
@@ -113,8 +144,7 @@ public class MainActivity extends Activity
 											  boolean fromUser) {
                     progress = progress - 50;
 				    etDistX.setText(Float.toString(progress));
-                    //fl.setRadius(progress);
-					fMoveDistX = Float.parseFloat(etDistX.getText().toString());
+                    fMoveDistX = Float.parseFloat(etDistX.getText().toString());
                 }
 
                 @Override
@@ -138,8 +168,7 @@ public class MainActivity extends Activity
 											  boolean fromUser) {
                     progress = progress - 50;
 				    etDistY.setText(Float.toString(progress));
-                    //fl.setRadius(progress);
-					fMoveDistY = Float.parseFloat(etDistY.getText().toString());
+                    fMoveDistY = Float.parseFloat(etDistY.getText().toString());
                 }
 
                 @Override

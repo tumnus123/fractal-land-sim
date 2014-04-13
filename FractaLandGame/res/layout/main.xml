@@ -20,10 +20,10 @@
 			android:id="@+id/etSpacing"
 			android:layout_width="50dp"
 			android:layout_height="wrap_content"
-			android:text="5"/>
+			android:text="10"/>
 		<SeekBar
 			android:id="@+id/sbSpacing"
-			android:layout_width="150dp"
+			android:layout_width="50dp"
 			android:layout_height="match_parent"
 		/>
 		<TextView
@@ -35,10 +35,10 @@
 			android:id="@+id/etRadius"
 			android:layout_width="50dp"
 			android:layout_height="wrap_content"
-			android:text="5"/>
+			android:text="10"/>
 		<SeekBar
 			android:id="@+id/sbRadius"
-			android:layout_width="150dp"
+			android:layout_width="50dp"
 			android:layout_height="match_parent"
 			/>
 		<Button
@@ -46,6 +46,7 @@
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
 			android:text="Densify" />
+
 
 	</LinearLayout>
 
@@ -55,6 +56,21 @@
 		android:gravity="left"
 		android:orientation="horizontal">
 		
+		<TextView
+			android:id="@+id/tvMag"
+			android:layout_width="wrap_content"
+			android:layout_height="match_parent"
+			android:text="Mag:"/>
+		<EditText
+			android:id="@+id/etMag"
+			android:layout_width="90dp"
+			android:layout_height="wrap_content"
+			android:text="0"/>
+		<SeekBar
+			android:id="@+id/sbMag"
+			android:layout_width="150dp"
+			android:layout_height="match_parent"
+		/>
 		<TextView
 			android:id="@+id/tvDistX"
 			android:layout_width="wrap_content"

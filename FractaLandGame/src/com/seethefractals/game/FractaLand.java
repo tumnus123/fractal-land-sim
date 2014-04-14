@@ -37,8 +37,10 @@ public class FractaLand
 	private float fSpacing;
 	private float fOffsetX;
 	private float fOffsetY;
+	private float fOffsetMag;
 	private float fDeltaX;
 	private float fDeltaY;
+	private float fDeltaMag;
 	private float fSpeedXY;
 	private final Paint paint = new Paint();
 
@@ -67,12 +69,14 @@ public class FractaLand
 		// init offsets
 		fOffsetX = 0f;
 		fOffsetY = 0f;
+		fOffsetMag = 0f;
 		fSpeedXY = 1f;
 	}
 	
-	public void moveTo(float fDeltaX, float fDeltaY, double fDeltaMag){
+	public void moveTo(float fDeltaX, float fDeltaY, float fDeltaMag){
 		this.fDeltaX = fDeltaX;
 		this.fDeltaY = fDeltaY;
+		this.fDeltaMag = fDeltaMag; // CONTINUE HERE
 	}
 	
 	public void update() {

@@ -6,7 +6,7 @@ import android.graphics.*;
 
 /**
   * @author tumnus123
- * @author tarah.west
+  * @author tarah.west
   * 
   */
 public class FractaLand
@@ -32,7 +32,7 @@ public class FractaLand
 	// Newly added nodes are fully suppressed at initialization,
 	// meaning their initial height is the 
 
-	private ArrayList<ArrayList<Double>> al;
+	private ArrayList<ArrayList<Double>> fl;
 	private int iRadius;
 	private float fSpacing;
 	private float fOffsetX;
@@ -56,12 +56,12 @@ public class FractaLand
 		this.fSpacing = fSpacing;
 
 		// create and initialize
-		al = new ArrayList<ArrayList<Double>>(i);
+		fl = new ArrayList<ArrayList<Double>>(i);
 		for (int j = 0; j < i; j++)
 		{
 			ArrayList<Double> col = 
 				new ArrayList<Double>(Collections.nCopies(i, 0.0));
-			al.add(col);
+			fl.add(col);
 		}
 		
 		// init offsets
@@ -131,14 +131,14 @@ public class FractaLand
 	{
 		ArrayList<Double> thisAL;
 		if(addOnSide.equals("north")){
-			for(int i=0;i<al.size();i++) {
-				thisAL = al.get(i);
+			for(int i=0;i<fl.size();i++) {
+				thisAL = fl.get(i);
 				thisAL.add(0.0);
 				thisAL.remove(thisAL.size()-1);
 			}
 		} else {
-			for(int i=0;i<al.size();i++) {
-				thisAL = al.get(i);
+			for(int i=0;i<fl.size();i++) {
+				thisAL = fl.get(i);
 				thisAL.add(thisAL.size()-1,0.0);
 				thisAL.remove(0);
 			}
@@ -149,14 +149,14 @@ public class FractaLand
 	{
 		if(addOnSide.equals("west")){
 			ArrayList<Double> col = 
-				new ArrayList<Double>(Collections.nCopies(al.size(), 0.0));
-			al.add(col);
-			al.remove(al.size()-1);
+				new ArrayList<Double>(Collections.nCopies(fl.size(), 0.0));
+			fl.add(col);
+			fl.remove(fl.size()-1);
 		} else {
 			ArrayList<Double> col = 
-				new ArrayList<Double>(Collections.nCopies(al.size(), 0.0));
-			al.add(al.size()-1,col);
-			al.remove(0);
+				new ArrayList<Double>(Collections.nCopies(fl.size(), 0.0));
+			fl.add(fl.size()-1,col);
+			fl.remove(0);
 		}
 		
 	}
@@ -189,7 +189,7 @@ public class FractaLand
 		// center node is 0,0
 		int offX = x + iRadius;
 		int offY = y + iRadius;
-		return al.get(offX).get(offY);
+		return fl.get(offX).get(offY);
 	}
 
 	public void setXY(int x, int y, Double val)
@@ -197,7 +197,7 @@ public class FractaLand
 		// center node is 0,0
 		int offX = x + iRadius;
 		int offY = y + iRadius;
-		al.get(offX).set(offY, val);
+		fl.get(offX).set(offY, val);
 	}
 
 	public void setRadius(int iRadius) {

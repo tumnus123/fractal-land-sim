@@ -109,18 +109,28 @@ public class MainActivity extends Activity
 		fMoveMag = Float.parseFloat(etMag.getText().toString());
 		etMag.setText(fMoveMag+"");
 		sbMag = (SeekBar) findViewById(R.id.sbMag);
-		sbMag.setMax(200);
-		sbMag.setProgress(100);
+		sbMag.setMax(4);
+		sbMag.setProgress(2);
 		sbMag.setOnSeekBarChangeListener(new OnSeekBarChangeListener(){
 				@Override
                 public void onProgressChanged(SeekBar seekBar, int progress,
 											  boolean fromUser) {
-                    Float fProgress = progress * 1f;
-					fProgress = fProgress - 49.99f;
-					// mag range is 0.5 to 2.0
-					fProgress = fProgress / 50f; 
-				    etMag.setText(Float.toString(fProgress).substring(0,4));
-                    fMoveMag = Float.parseFloat(etMag.getText().toString());
+                    
+					switch (progress) {
+						case 0: etMag.setText("0.25");
+								break;
+						case 1: etMag.setText("0.5");
+								break;
+						case 2: etMag.setText("1.0");
+							break;
+						case 3: etMag.setText("2.0");
+							break;
+						case 4: etMag.setText("4.0");
+							break;
+						default: etMag.setText("1.0");
+							break;
+					}							  
+					fMoveMag = Float.parseFloat(etMag.getText().toString());
                 }
 
                 @Override

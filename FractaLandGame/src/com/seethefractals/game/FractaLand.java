@@ -42,7 +42,7 @@ public class FractaLand
 	private float fDeltaY;
 	private float fDeltaMag;
 	private float fSpeedXY;
-	private final Paint paint = new Paint();
+	private final Paint paint = new Paint(Paint.ANTI_ALIAS_FLAG);
 
 	public FractaLand(int iRadius, float fSpacing)
 	{
@@ -196,7 +196,7 @@ public class FractaLand
 				paint.setColor(Color.WHITE);
 				float x1 = ctrX + (x * fSpacing) + fOffsetX;
 				float y1 = ctrY + (y * fSpacing) + fOffsetY;
-				c.drawLine(x1-0.5f,y1-0.5f,x1+0.5f,y1+0.5f, paint);
+				c.drawCircle(x1,y1,1.0f, paint);
 			}
 		}
 	}

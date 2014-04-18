@@ -198,7 +198,7 @@ public class MainActivity extends Activity
 				public void onClick(View p1)
 				{
 					makeToast(fMoveDistY + "");
-					fl.moveTo(fMoveDistX,fMoveDistY,0f); // TEST
+					fl.moveTo(fMoveDistX,fMoveDistY,fMoveMag); 
 					
 				}
 				

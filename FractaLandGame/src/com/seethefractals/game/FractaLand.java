@@ -80,19 +80,32 @@ public class FractaLand
 	}
 	
 	public void update() {
-		float fIncrement = 0f;
+		float fIncrementX = 0f;
+		float fIncrementY = 0f;
+		float fIncrementMag = 0f;
 		if(Math.abs(fDeltaX)>0f){
-			fIncrement = fDeltaX*0.1f*fSpeedXY; // revise?
-			fDeltaX=fDeltaX-fIncrement;
-			fOffsetX=fOffsetX+fIncrement;
+			fIncrementX = fDeltaX*0.1f*fSpeedXY; // revise?
+			fDeltaX=fDeltaX-fIncrementX;
+			fOffsetX=fOffsetX+fIncrementX;
 			adjustFLX();
 		}
 		if(Math.abs(fDeltaY)>0f){
-			fIncrement = fDeltaY*0.1f*fSpeedXY; // revise?
-			fDeltaY=fDeltaY-fIncrement;
-			fOffsetY=fOffsetY+fIncrement;
+			fIncrementY = fDeltaY*0.1f*fSpeedXY; // revise?
+			fDeltaY=fDeltaY-fIncrementY;
+			fOffsetY=fOffsetY+fIncrementY;
 			adjustFLY();
 		}
+		if(fDeltaMag>1.0f){
+			fIncrementMag = 0.05f; 
+			fDeltaMag=fDeltaMag-fIncrementMag;
+			//fOffsetY=fOffsetY+fIncrement;
+			adjustFLMag(fIncrementMag);
+		}
+	}
+
+	private void adjustFLMag(float fIncrement)
+	{
+		fSpacing+=fIncrement;
 	}
 
 	private void adjustFLX()
@@ -183,7 +196,7 @@ public class FractaLand
 				paint.setColor(Color.WHITE);
 				float x1 = ctrX + (x * fSpacing) + fOffsetX;
 				float y1 = ctrY + (y * fSpacing) + fOffsetY;
-				c.drawLine(x1, y1, x1 + 1, y1 + 1, paint);
+				c.drawLine(x1-0.5f,y1-0.5f,x1+0.5f,y1+0.5f, paint);
 			}
 		}
 	}

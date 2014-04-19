@@ -202,6 +202,7 @@ public class FractaLand
 			for (int y=iRadius * -1;y <= iRadius;y++)
 			{
 				paint.setColor(fl.get(x+iRadius).get(y+iRadius).getII());
+				paint.setAlpha(200);
 				float x1 = ctrX + (x * fSpacing) + fOffsetX;
 				float y1 = ctrY + (y * fSpacing) + fOffsetY;
 				c.drawCircle(x1,y1,1.5f, paint);

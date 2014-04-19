@@ -10,7 +10,7 @@ public class FracNode
 	public FracNode() {
 		this.dX = 0d;
 		this.dY = 0d;
-		this.iI = Color.BLUE;
+		this.iI = Color.YELLOW;
 	}
 
 	public FracNode(double dX, double dY, int iI) {

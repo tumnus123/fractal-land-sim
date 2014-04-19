@@ -62,12 +62,11 @@ public class FractaLand
 		this.fMaxSpacing = fSpacing * 2;
 
 		// create and initialize
-		//fl = new ArrayList<ArrayList<Double>(i);
 		fl = new ArrayList<ArrayList<FracNode>>(i);
 		for (int j = 0; j < i; j++)
 		{
 			ArrayList<FracNode> col = 
-				new ArrayList<FracNode>(Collections.nCopies(i, new FracNode()));
+				new ArrayList<FracNode>(Collections.nCopies(i, new FracNode(0d,0d,Color.WHITE,255)));
 			fl.add(col);
 		}
 		
@@ -141,7 +140,7 @@ public class FractaLand
 		ArrayList<FracNode> thisAL;
 		for (int i=0;i<fl.size();i++) {
 			thisAL = fl.get(i);
-			thisAL.add(index, new FracNode());
+			thisAL.add(index, new FracNode(0d,0d,Color.YELLOW,255));
 		}
 	}
 	private void removeRowAt(int index) {
@@ -152,7 +151,7 @@ public class FractaLand
 		}
 	}
 	private void addColAt(int index) {
-		ArrayList<FracNode> col = new ArrayList<FracNode>(Collections.nCopies(fl.size(), new FracNode()));
+		ArrayList<FracNode> col = new ArrayList<FracNode>(Collections.nCopies(fl.size(), new FracNode(0d,0d,Color.BLUE,255)));
 		fl.add(index, col);
 	}
 	private void removeColAt(int index) {
@@ -170,11 +169,24 @@ public class FractaLand
 		c.drawLine(ctrX-5,ctrY,ctrX+5,ctrY, paint);
 		c.drawLine(ctrX,ctrY-5,ctrX,ctrY+5, paint);
 		
+		// draw the FracNodes centered at 0,0
 		for (int x=iRadius * -1;x <= iRadius;x++)
 		{
 			for (int y=iRadius * -1;y <= iRadius;y++)
 			{
-				paint.setColor(fl.get(x+iRadius).get(y+iRadius).getII());
+				paint.setColor(fl.get(x+iRadius).get(y+iRadius).getIter());
+				paint.setAlpha(200);
+				float x1 = ctrX + (x * fSpacing) + fOffsetX;
+				float y1 = ctrY + (y * fSpacing) + fOffsetY;
+				c.drawCircle(x1,y1,1.5f, paint);
+			}
+		}
+		
+		for (int x=iRadius * -1;x <= iRadius;x++)
+		{
+			for (int y=iRadius * -1;y <= iRadius;y++)
+			{
+				paint.setColor(fl.get(x+iRadius).get(y+iRadius).getIter());
 				paint.setAlpha(200);
 				float x1 = ctrX + (x * fSpacing) + fOffsetX;
 				float y1 = ctrY + (y * fSpacing) + fOffsetY;

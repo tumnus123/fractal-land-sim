@@ -3,50 +3,53 @@ import android.graphics.*;
 
 public class FracNode
 {
-	public double dX;
-	public double dY;
-	public int iI;
+	private double dX;
+	private double dY;
+	private int iIter;
+	private int iPresence;
 
 	public FracNode() {
 		this.dX = 0d;
 		this.dY = 0d;
-		this.iI = Color.YELLOW;
+		this.iIter = 0;
+		this.iPresence = 0;
 	}
 
-	public FracNode(double dX, double dY, int iI) {
+	public FracNode(double dX, double dY, int iIter, int iPresence) {
 		this.dX = dX;
 		this.dY = dY;
-		this.iI = iI;
+		this.iIter = iIter;
+		this.iPresence = iPresence;
 	}
 	
-	public void setDX(double dX)
+	public void setX(double dX)
 	{
 		this.dX = dX;
 	}
 
-	public double getDX()
+	public double getX()
 	{
 		return dX;
 	}
 
-	public void setDY(double dY)
+	public void setY(double dY)
 	{
 		this.dY = dY;
 	}
 
-	public double getDY()
+	public double getY()
 	{
 		return dY;
 	}
 
-	public void setII(int iI)
+	public void setIter(int iIter)
 	{
-		this.iI = iI;
+		this.iIter = iIter;
 	}
 
-	public int getII()
+	public int getIter()
 	{
-		return iI;
+		return iIter;
 	}
 	
 	

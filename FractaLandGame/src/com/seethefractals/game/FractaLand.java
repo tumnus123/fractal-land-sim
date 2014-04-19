@@ -129,10 +129,14 @@ public class FractaLand
 	private void shiftRows()
 	{
 		if(fOffsetY>0f){
-			addRow("north");
+			//addRow("north");
+			addRowAt(0);
+			removeRowAt(fl.size()-1);
 			fOffsetY-=fSpacing;
 		} else {
-			addRow("south");
+			//addRow("south");
+			addRowAt(fl.size()-1);
+			removeRowAt(0);
 			fOffsetY+=fSpacing;
 		}
 	}
@@ -140,50 +144,36 @@ public class FractaLand
 	private void shiftColumns()
 	{
 		if(fOffsetX>0f){
-			addColumn("east");
+			addColAt(0);
+			removeColAt(fl.size()-1);
 			fOffsetX-=fSpacing;
 		} else {
-			addColumn("west");
+			addColAt(fl.size()-1);
+			removeColAt(0);
 			fOffsetX+=fSpacing;
 		}
 	}
 	
 	private void addRowAt(int index) {
-		
-	}
-	
-	private void addRow(String addOnSide)
-	{
 		ArrayList<FracNode> thisAL;
-		if(addOnSide.equals("north")){
-			for(int i=0;i<fl.size();i++) {
-				thisAL = fl.get(i);
-				thisAL.add(new FracNode());
-				thisAL.remove(thisAL.size()-1);
-			}
-		} else {
-			for(int i=0;i<fl.size();i++) {
-				thisAL = fl.get(i);
-				thisAL.add(thisAL.size()-1, new FracNode());
-				thisAL.remove(0);
-			}
+		for (int i=0;i<fl.size();i++) {
+			thisAL = fl.get(i);
+			thisAL.add(index, new FracNode());
 		}
 	}
-	
-	private void addColumn(String addOnSide)
-	{
-		if(addOnSide.equals("west")){
-			ArrayList<FracNode> col = 
-				new ArrayList<FracNode>(Collections.nCopies(fl.size(), new FracNode()));
-			fl.add(col);
-			fl.remove(fl.size()-1);
-		} else {
-			ArrayList<FracNode> col = 
-				new ArrayList<FracNode>(Collections.nCopies(fl.size(), new FracNode()));
-			fl.add(fl.size()-1,col);
-			fl.remove(0);
+	private void removeRowAt(int index) {
+		ArrayList<FracNode> thisAL;
+		for (int i=0;i<fl.size();i++) {
+			thisAL = fl.get(i);
+			thisAL.remove(index);
 		}
-		
+	}
+	private void addColAt(int index) {
+		ArrayList<FracNode> col = new ArrayList<FracNode>(Collections.nCopies(fl.size(), new FracNode()));
+		fl.add(index, col);
+	}
+	private void removeColAt(int index) {
+		fl.remove(index);
 	}
 	
 	public void draw(Canvas c) {

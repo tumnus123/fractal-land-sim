@@ -16,9 +16,9 @@ public class FractaLand
 	// add a row/col, remove a row/col, suppress a row/col,
 	// erodeHeights...
 	//
-	// this class depends on the ScapeNode class
+	// this class depends on the FracNode class
 	//
-	// the ScapeNode class represents a point as a
+	// the FracNode class represents a point as a
 	// position on a grid of unevenly-spaced points
 	// Properties include iXpos, iYpos, fHeight, fOffset  
 	// Origin is center of grid
@@ -32,9 +32,12 @@ public class FractaLand
 	// Newly added nodes are fully suppressed at initialization,
 	// meaning their initial height is the 
 
-	private ArrayList<ArrayList<Double>> fl;
+	//private ArrayList<ArrayList<Double>> fl;
+	private ArrayList<ArrayList<FracNode>> fl;
+	
 	private int iRadius;
 	private float fSpacing;
+	private float fMaxSpacing;
 	private float fOffsetX;
 	private float fOffsetY;
 	private float fOffsetMag;
@@ -56,13 +59,15 @@ public class FractaLand
 
 		// Spacing is the screen space between nodes
 		this.fSpacing = fSpacing;
+		this.fMaxSpacing = fSpacing * 2;
 
 		// create and initialize
-		fl = new ArrayList<ArrayList<Double>>(i);
+		//fl = new ArrayList<ArrayList<Double>(i);
+		fl = new ArrayList<ArrayList<FracNode>>(i);
 		for (int j = 0; j < i; j++)
 		{
-			ArrayList<Double> col = 
-				new ArrayList<Double>(Collections.nCopies(i, 0.0));
+			ArrayList<FracNode> col = 
+				new ArrayList<FracNode>(Collections.nCopies(i, new FracNode()));
 			fl.add(col);
 		}
 		
@@ -76,7 +81,7 @@ public class FractaLand
 	public void moveTo(float fDeltaX, float fDeltaY, float fDeltaMag){
 		this.fDeltaX = fDeltaX;
 		this.fDeltaY = fDeltaY;
-		this.fDeltaMag = fDeltaMag; // CONTINUE HERE
+		this.fDeltaMag = fDeltaMag;
 	}
 	
 	public void update() {
@@ -98,7 +103,6 @@ public class FractaLand
 		if(fDeltaMag>1.0f){
 			fIncrementMag = 0.05f; 
 			fDeltaMag=fDeltaMag-fIncrementMag;
-			//fOffsetY=fOffsetY+fIncrement;
 			adjustFLMag(fIncrementMag);
 		}
 	}
@@ -143,20 +147,20 @@ public class FractaLand
 			fOffsetX+=fSpacing;
 		}
 	}
-
+	
 	private void addRow(String addOnSide)
 	{
-		ArrayList<Double> thisAL;
+		ArrayList<FracNode> thisAL;
 		if(addOnSide.equals("north")){
 			for(int i=0;i<fl.size();i++) {
 				thisAL = fl.get(i);
-				thisAL.add(0.0);
+				thisAL.add(new FracNode());
 				thisAL.remove(thisAL.size()-1);
 			}
 		} else {
 			for(int i=0;i<fl.size();i++) {
 				thisAL = fl.get(i);
-				thisAL.add(thisAL.size()-1,0.0);
+				thisAL.add(thisAL.size()-1, new FracNode());
 				thisAL.remove(0);
 			}
 		}
@@ -165,13 +169,13 @@ public class FractaLand
 	private void addColumn(String addOnSide)
 	{
 		if(addOnSide.equals("west")){
-			ArrayList<Double> col = 
-				new ArrayList<Double>(Collections.nCopies(fl.size(), 0.0));
+			ArrayList<FracNode> col = 
+				new ArrayList<FracNode>(Collections.nCopies(fl.size(), new FracNode()));
 			fl.add(col);
 			fl.remove(fl.size()-1);
 		} else {
-			ArrayList<Double> col = 
-				new ArrayList<Double>(Collections.nCopies(fl.size(), 0.0));
+			ArrayList<FracNode> col = 
+				new ArrayList<FracNode>(Collections.nCopies(fl.size(), new FracNode()));
 			fl.add(fl.size()-1,col);
 			fl.remove(0);
 		}
@@ -193,15 +197,15 @@ public class FractaLand
 		{
 			for (int y=iRadius * -1;y <= iRadius;y++)
 			{
-				paint.setColor(Color.WHITE);
+				paint.setColor(fl.get(x+iRadius).get(y+iRadius).getII());
 				float x1 = ctrX + (x * fSpacing) + fOffsetX;
 				float y1 = ctrY + (y * fSpacing) + fOffsetY;
-				c.drawCircle(x1,y1,1.0f, paint);
+				c.drawCircle(x1,y1,1.5f, paint);
 			}
 		}
 	}
 
-	public Double getXY(int x, int y)
+	public FracNode getXY(int x, int y)
 	{
 		// center node is 0,0
 		int offX = x + iRadius;
@@ -214,7 +218,7 @@ public class FractaLand
 		// center node is 0,0
 		int offX = x + iRadius;
 		int offY = y + iRadius;
-		fl.get(offX).set(offY, val);
+		fl.get(offX).set(offY, new FracNode());
 	}
 
 	public void setRadius(int iRadius) {

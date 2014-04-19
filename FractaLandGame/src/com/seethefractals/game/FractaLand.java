@@ -92,49 +92,32 @@ public class FractaLand
 			fIncrementX = fDeltaX*0.1f*fSpeedXY; // revise?
 			fDeltaX=fDeltaX-fIncrementX;
 			fOffsetX=fOffsetX+fIncrementX;
-			adjustFLX();
+			if(Math.abs(fOffsetX)>=fSpacing){
+				shiftColumns();
+			}
 		}
 		if(Math.abs(fDeltaY)>0f){
 			fIncrementY = fDeltaY*0.1f*fSpeedXY; // revise?
 			fDeltaY=fDeltaY-fIncrementY;
 			fOffsetY=fOffsetY+fIncrementY;
-			adjustFLY();
+			if(Math.abs(fOffsetY)>=fSpacing){
+				shiftRows();
+				}
 		}
 		if(fDeltaMag>1.0f){
 			fIncrementMag = 0.05f; 
 			fDeltaMag=fDeltaMag-fIncrementMag;
-			adjustFLMag(fIncrementMag);
-		}
-	}
-
-	private void adjustFLMag(float fIncrement)
-	{
-		fSpacing+=fIncrement;
-	}
-
-	private void adjustFLX()
-	{
-		if(Math.abs(fOffsetX)>=fSpacing){
-			shiftColumns();
-		}
-	}
-
-	private void adjustFLY()
-	{
-		if(Math.abs(fOffsetY)>=fSpacing){
-			shiftRows();
+			fSpacing+=fIncrementMag;
 		}
 	}
 
 	private void shiftRows()
 	{
 		if(fOffsetY>0f){
-			//addRow("north");
 			addRowAt(0);
 			removeRowAt(fl.size()-1);
 			fOffsetY-=fSpacing;
 		} else {
-			//addRow("south");
 			addRowAt(fl.size()-1);
 			removeRowAt(0);
 			fOffsetY+=fSpacing;

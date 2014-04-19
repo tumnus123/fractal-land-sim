@@ -148,6 +148,10 @@ public class FractaLand
 		}
 	}
 	
+	private void addRowAt(int index) {
+		
+	}
+	
 	private void addRow(String addOnSide)
 	{
 		ArrayList<FracNode> thisAL;

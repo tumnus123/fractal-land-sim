@@ -110,22 +110,22 @@ public class MainActivity extends Activity
 		etMag.setText(fMoveMag+"");
 		sbMag = (SeekBar) findViewById(R.id.sbMag);
 		sbMag.setMax(4);
-		sbMag.setProgress(2);
+		sbMag.setProgress(1);
 		sbMag.setOnSeekBarChangeListener(new OnSeekBarChangeListener(){
 				@Override
                 public void onProgressChanged(SeekBar seekBar, int progress,
 											  boolean fromUser) {
                     
 					switch (progress) {
-						case 0: etMag.setText("0.25");
+						case 0: etMag.setText("0.5");
 								break;
-						case 1: etMag.setText("0.5");
+						case 1: etMag.setText("1.0");
 								break;
-						case 2: etMag.setText("1.0");
+						case 2: etMag.setText("2.0");
 							break;
-						case 3: etMag.setText("2.0");
+						case 3: etMag.setText("4.0");
 							break;
-						case 4: etMag.setText("4.0");
+						case 4: etMag.setText("8.0");
 							break;
 						default: etMag.setText("1.0");
 							break;

@@ -116,8 +116,8 @@ public class FractaLand
 				addRowAt(i);
 				addColAt(i);
 			}
-			//iRadius  = iRadius + numToInsert;
-			iRadius = 2;
+			iRadius*=2; // iRadius + numToInsert;
+			//iRadius = 2;
 		}
 	}
 

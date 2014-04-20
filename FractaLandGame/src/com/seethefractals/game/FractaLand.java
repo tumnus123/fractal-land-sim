@@ -3,6 +3,7 @@ package com.seethefractals.game;
 import java.util.ArrayList;
 import java.util.Collections;
 import android.graphics.*;
+import android.util.*;
 
 /**
   * @author tumnus123
@@ -181,12 +182,13 @@ public class FractaLand
 		c.drawLine(ctrX,ctrY-5,ctrX,ctrY+5, paint);
 		
 		// draw the FracNodes centered at 0,0
-		for (int x=iRadius * -1;x <= iRadius;x++)
+		for (int x=iRadius * -1;x<=iRadius;x++)
 		{
-			for (int y=iRadius * -1;y <= iRadius;y++)
+			for (int y=iRadius * -1;y<=iRadius;y++)
 			{
+				Log.v("FractaLand","iRadius="+iRadius+", X="+x+", Y="+y);
 				//paint.setColor(fl.get(x+iRadius).get(y+iRadius).getIter());
-				paint.setAlpha(200);
+				paint.setAlpha(255);
 				float x1 = ctrX + (x * fSpacing) + fOffsetX;
 				float y1 = ctrY + (y * fSpacing) + fOffsetY;
 				c.drawCircle(x1,y1,1.5f, paint);

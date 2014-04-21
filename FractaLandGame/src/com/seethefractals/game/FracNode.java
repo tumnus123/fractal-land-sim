@@ -6,20 +6,30 @@ public class FracNode
 	private double dX;
 	private double dY;
 	private int iIter;
-	private int iPresence;
+	private int iAlpha;
 
 	public FracNode() {
 		this.dX = 0d;
 		this.dY = 0d;
 		this.iIter = 0;
-		this.iPresence = 0;
+		this.iAlpha = 0;
 	}
 
-	public FracNode(double dX, double dY, int iIter, int iPresence) {
+	public FracNode(double dX, double dY, int iIter, int iAlpha) {
 		this.dX = dX;
 		this.dY = dY;
 		this.iIter = iIter;
-		this.iPresence = iPresence;
+		this.iAlpha = iAlpha;
+	}
+
+	public void setAlpha(int iAlpha)
+	{
+		this.iAlpha = iAlpha;
+	}
+
+	public int getAlpha()
+	{
+		return iAlpha;
 	}
 	
 	public void setX(double dX)

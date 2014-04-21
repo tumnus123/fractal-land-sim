@@ -138,9 +138,9 @@ public class FractaLand
 					fnNew = newfl.get(xF).get(yF);
 					fnNew.setX(fnOld.getX());
 					fnNew.setY(fnOld.getY());
-					fnNew.setIter(Color.RED); //fnOld.getIter());
-					Log.v("update","old("+x+","+y+"), new("+xF+","+yF+")");
-					// also need Presence
+					fnNew.setIter(fnOld.getIter());
+					fnNew.setAlpha(128); //fnOld.getAlpha());
+					//Log.v("update","old("+x+","+y+","+fnOld.getIter()+"), new("+xF+","+yF+")");
 				}
 			}
 			fl = newfl;
@@ -216,16 +216,16 @@ public class FractaLand
 		
 		// draw the FracNodes centered at 0,0
 		ArrayList row;
-		FracNode col;
+		FracNode node;
 		for (int x=iRadius * -1;x<=iRadius;x++)
 		{
 			for (int y=iRadius * -1;y<=iRadius;y++)
 			{
 				//Log.v("FractaLand","iRadius="+iRadius+", X="+x+", Y="+y);
 				row = fl.get(x+iRadius);
-				col = (FracNode) row.get(y+iRadius);
-				paint.setColor(col.getIter());
-				paint.setAlpha(255);
+				node = (FracNode) row.get(y+iRadius);
+				paint.setColor(node.getIter());
+				paint.setAlpha(node.getAlpha());
 				float x1 = ctrX + (x * fSpacing) + fOffsetX;
 				float y1 = ctrY + (y * fSpacing) + fOffsetY;
 				c.drawCircle(x1,y1,1.5f, paint);

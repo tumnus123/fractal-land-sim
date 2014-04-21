@@ -79,6 +79,7 @@ public class FractaLand
 	}
 	
 	public void moveTo(float fDeltaX, float fDeltaY, float fDeltaMag){
+		Log.v("moveTo()","fl.size="+fl.size());
 		this.fDeltaX = fDeltaX;
 		this.fDeltaY = fDeltaY;
 		this.fDeltaMag = fDeltaMag;
@@ -105,20 +106,51 @@ public class FractaLand
 			}
 		}
 		if(fDeltaMag>1.0f){
-			fIncrementMag = 0.05f; 
+			fIncrementMag = 0.2f; 
 			fDeltaMag=fDeltaMag-fIncrementMag;
 			fSpacing+=fIncrementMag;
 		}
 		if(fSpacing>fMaxSpacing) {
-			fSpacing = fMaxSpacing / 2;
-			// insert rows and cols
-			int numToInsert = fl.size()-1;
-			for(int i=numToInsert;i>0;i--) {
-				addRowAt(i);
-				addColAt(i);
+			// new approach:
+			// 1) generate a new fl
+			iRadius *= 2;
+			int iWidth  = iRadius*2+1;
+			fSpacing /= 2;
+			fOffsetX /= 2;
+			fOffsetY /=2;
+			ArrayList<ArrayList<FracNode>> newfl;
+			newfl = new ArrayList<ArrayList<FracNode>>(iWidth);
+			for (int j = 0; j < iWidth; j++)
+			{
+				ArrayList<FracNode> col = 
+					new ArrayList<FracNode>(Collections.nCopies(iWidth, new FracNode(0d,0d,Color.WHITE,255)));
+				newfl.add(col);
 			}
-			iRadius*=2; // iRadius + numToInsert;
-			//iRadius = 2;
+			// 2) pop with old fl values and sub
+			int xF = 0;
+			int yF = 0;
+			FracNode fnOld, fnNew;
+			for(int x=0;x<fl.size();x++) {
+				for(int y=0;y<fl.size();y++) {
+					xF = x*2;
+					yF = y*2;
+					fnOld = fl.get(x).get(y);
+					fnNew = newfl.get(xF).get(yF);
+					fnNew.setX(fnOld.getX());
+					fnNew.setY(fnOld.getY());
+					fnNew.setIter(fnOld.getIter());
+					// also need Presence
+				}
+			}
+			fl = newfl;
+			
+//			fSpacing = fMaxSpacing / 2;
+//			int numToInsert = fl.size()-1;
+//			for(int i=numToInsert;i>0;i--) {
+//				addRowAt(i);
+//				addColAt(i);
+//			}
+//			iRadius*=2;
 		}
 	}
 
@@ -182,18 +214,23 @@ public class FractaLand
 		c.drawLine(ctrX,ctrY-5,ctrX,ctrY+5, paint);
 		
 		// draw the FracNodes centered at 0,0
+		ArrayList row;
+		FracNode col;
 		for (int x=iRadius * -1;x<=iRadius;x++)
 		{
 			for (int y=iRadius * -1;y<=iRadius;y++)
 			{
-				Log.v("FractaLand","iRadius="+iRadius+", X="+x+", Y="+y);
-				//paint.setColor(fl.get(x+iRadius).get(y+iRadius).getIter());
+				//Log.v("FractaLand","iRadius="+iRadius+", X="+x+", Y="+y);
+				row = fl.get(x+iRadius);
+				col = (FracNode) row.get(y+iRadius);
+				paint.setColor(col.getIter());
 				paint.setAlpha(255);
 				float x1 = ctrX + (x * fSpacing) + fOffsetX;
 				float y1 = ctrY + (y * fSpacing) + fOffsetY;
 				c.drawCircle(x1,y1,1.5f, paint);
 			}
 		}
+		
 		
 //		for (int x=iRadius * -1;x <= iRadius;x++)
 //		{

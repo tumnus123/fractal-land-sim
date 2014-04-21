@@ -123,7 +123,7 @@ public class FractaLand
 			for (int j = 0; j < iWidth; j++)
 			{
 				ArrayList<FracNode> col = 
-					new ArrayList<FracNode>(Collections.nCopies(iWidth, new FracNode(0d,0d,Color.WHITE,255)));
+					new ArrayList<FracNode>(Collections.nCopies(iWidth, new FracNode(0d,0d,Color.GREEN,255)));
 				newfl.add(col);
 			}
 			// 2) pop with old fl values and sub
@@ -138,7 +138,8 @@ public class FractaLand
 					fnNew = newfl.get(xF).get(yF);
 					fnNew.setX(fnOld.getX());
 					fnNew.setY(fnOld.getY());
-					fnNew.setIter(fnOld.getIter());
+					fnNew.setIter(Color.RED); //fnOld.getIter());
+					Log.v("update","old("+x+","+y+"), new("+xF+","+yF+")");
 					// also need Presence
 				}
 			}

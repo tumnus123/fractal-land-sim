@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import android.graphics.*;
 import android.util.*;
+import java.util.*;
 
 /**
   * @author tumnus123
@@ -114,16 +115,19 @@ public class FractaLand
 			// new approach:
 			// 1) generate a new fl
 			iRadius *= 2;
-			int iWidth  = iRadius*2+1;
+			int iWidth  = (iRadius*2)+1;
 			fSpacing /= 2;
 			fOffsetX /= 2;
 			fOffsetY /=2;
 			ArrayList<ArrayList<FracNode>> newfl;
 			newfl = new ArrayList<ArrayList<FracNode>>(iWidth);
-			for (int j = 0; j < iWidth; j++)
-			{
-				ArrayList<FracNode> col = 
-					new ArrayList<FracNode>(Collections.nCopies(iWidth, new FracNode(0d,0d,Color.GREEN,255)));
+			for (int x=0;x<iWidth;x++){
+				//ArrayList<FracNode> col = 
+				//	new ArrayList<FracNode>(Collections.nCopies(iWidth, new FracNode(0d,0d,Color.GREEN,255)));
+				ArrayList<FracNode> col = new ArrayList<FracNode>(iWidth);
+				for (int y=0;y<iWidth;y++) {
+					col.add(new FracNode(0d,0d,Color.BLUE,255));
+				}
 				newfl.add(col);
 			}
 			// 2) pop with old fl values and sub
@@ -139,19 +143,11 @@ public class FractaLand
 					fnNew.setX(fnOld.getX());
 					fnNew.setY(fnOld.getY());
 					fnNew.setIter(fnOld.getIter());
-					fnNew.setAlpha(128); //fnOld.getAlpha());
+					fnNew.setAlpha(fnOld.getAlpha());
 					//Log.v("update","old("+x+","+y+","+fnOld.getIter()+"), new("+xF+","+yF+")");
 				}
 			}
 			fl = newfl;
-			
-//			fSpacing = fMaxSpacing / 2;
-//			int numToInsert = fl.size()-1;
-//			for(int i=numToInsert;i>0;i--) {
-//				addRowAt(i);
-//				addColAt(i);
-//			}
-//			iRadius*=2;
 		}
 	}
 

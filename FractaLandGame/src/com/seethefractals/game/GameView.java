@@ -57,7 +57,7 @@ public class GameView extends SurfaceView
 			});
 
 		// Build the initial FL here
-		fl = new FractaLand(10, 10f, 300f);
+		fl = new FractaLand(5, 10f, 100f);
 		// TODO: Implement max view dist
 	}
 

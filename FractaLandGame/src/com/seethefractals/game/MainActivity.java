@@ -197,7 +197,6 @@ public class MainActivity extends Activity
 				@Override
 				public void onClick(View p1)
 				{
-					makeToast(fMoveDistY + "");
 					fl.moveTo(fMoveDistX,fMoveDistY,fMoveMag); 
 					
 				}

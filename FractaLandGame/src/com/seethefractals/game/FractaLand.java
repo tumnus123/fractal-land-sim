@@ -98,8 +98,8 @@ public class FractaLand
 		bDeltaY = Math.abs(fDeltaY)>0f;
 		bDeltaMag = fDeltaMag>1.0f;
 		// do x/y moves first, then mag, then crop
-		if(bDeltaX||bDeltaY) {
-			if(Math.abs(fDeltaX)>0f){
+		if (bDeltaX||bDeltaY) {
+			if(bDeltaX){
 				fIncrementX = fDeltaX*0.1f*fSpeedXY; // revise?
 				fDeltaX=fDeltaX-fIncrementX;
 				fOffsetX=fOffsetX+fIncrementX;
@@ -107,7 +107,7 @@ public class FractaLand
 					shiftColumns();
 				}
 			}
-			if(Math.abs(fDeltaY)>0f){
+			if(bDeltaY){
 				fIncrementY = fDeltaY*0.1f*fSpeedXY; // revise?
 				fDeltaY=fDeltaY-fIncrementY;
 				fOffsetY=fOffsetY+fIncrementY;
@@ -115,11 +115,15 @@ public class FractaLand
 					shiftRows();
 				}
 			}
-		} else if(bDeltaMag) {
+			return;
+		} 
+		if(bDeltaMag) {
 			fIncrementMag = 0.2f; 
 			fDeltaMag=fDeltaMag-fIncrementMag;
 			fSpacing+=fIncrementMag;
-		} else {
+			return;
+		} 
+		
 			if(fSpacing>fMaxSpacing) {
 				// new approach:
 				// 1) generate a new fl
@@ -175,14 +179,14 @@ public class FractaLand
 				iRemove--;
 				//}
 			}
-		}
+		
 	}
 
 	private void shiftRows()
 	{
 		if(fOffsetY>0f){
-			addRowAt(0);
 			removeRowAt(fl.size()-1);
+			addRowAt(0);
 			fOffsetY-=fSpacing;
 		} else {
 			addRowAt(fl.size()-1);
@@ -198,7 +202,7 @@ public class FractaLand
 			removeColAt(fl.size()-1);
 			fOffsetX-=fSpacing;
 		} else {
-			addColAt(fl.size()-1);
+			addColAt(fl.size());
 			removeColAt(0);
 			fOffsetX+=fSpacing;
 		}
@@ -240,7 +244,7 @@ public class FractaLand
 		// draw the FracNodes centered at 0,0
 		ArrayList row;
 		FracNode node;
-		int alpha;
+		int iAlpha;
 		for (int x=iRadius * -1;x<=iRadius;x++)
 		{
 			for (int y=iRadius * -1;y<=iRadius;y++)
@@ -248,29 +252,16 @@ public class FractaLand
 				//Log.v("FractaLand","iRadius="+iRadius+", X="+x+", Y="+y);
 				row = fl.get(x+iRadius);
 				node = (FracNode) row.get(y+iRadius);
-				alpha = node.getAlpha();
+				iAlpha = node.getAlpha();
 				paint.setColor(node.getIter());
-				paint.setAlpha(alpha);
+				paint.setAlpha(iAlpha);
 				float x1 = ctrX + (x * fSpacing) + fOffsetX;
 				float y1 = ctrY + (y * fSpacing) + fOffsetY;
 				c.drawCircle(x1,y1,1.5f, paint);
 				// increment node alpha slowly
-				if(alpha<255) {node.setAlpha(alpha+1);}
+				if(iAlpha<255) {node.setAlpha(iAlpha+2);}
 			}
-		}
-		
-		
-//		for (int x=iRadius * -1;x <= iRadius;x++)
-//		{
-//			for (int y=iRadius * -1;y <= iRadius;y++)
-//			{
-//				paint.setColor(fl.get(x+iRadius).get(y+iRadius).getIter());
-//				paint.setAlpha(200);
-//				float x1 = ctrX + (x * fSpacing) + fOffsetX;
-//				float y1 = ctrY + (y * fSpacing) + fOffsetY;
-//				c.drawCircle(x1,y1,1.5f, paint);
-//			}
-//		}
+		}		
 	}
 
 	public FracNode getXY(int x, int y)

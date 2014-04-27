@@ -185,12 +185,12 @@ public class FractaLand
 	private void shiftRows()
 	{
 		if(fOffsetY>0f){
-			removeRowAt(fl.size()-1);
 			addRowAt(0);
+			removeRowAt(fl.size()-1);
 			fOffsetY-=fSpacing;
 		} else {
-			addRowAt(fl.size()-1);
 			removeRowAt(0);
+			addRowAt(fl.size()-1);
 			fOffsetY+=fSpacing;
 		}
 	}

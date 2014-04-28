@@ -97,8 +97,6 @@ public class FractaLand
 		bDeltaX = Math.abs(fDeltaX)>0f;
 		bDeltaY = Math.abs(fDeltaY)>0f;
 		bDeltaMag = fDeltaMag>1.0f;
-		// do x/y moves first, then mag, then crop
-		if (bDeltaX||bDeltaY) {
 			if(bDeltaX){
 				fIncrementX = fDeltaX*0.1f*fSpeedXY; // revise?
 				fDeltaX=fDeltaX-fIncrementX;
@@ -115,8 +113,6 @@ public class FractaLand
 					shiftRows();
 				}
 			}
-			return;
-		} 
 		if(bDeltaMag) {
 			fIncrementMag = 0.2f; 
 			fDeltaMag=fDeltaMag-fIncrementMag;
@@ -130,8 +126,8 @@ public class FractaLand
 				iRadius *= 2;
 				int iWidth  = (iRadius*2)+1;
 				fSpacing /= 2;
-				fOffsetX /= 2;
-				fOffsetY /=2;
+				//fOffsetX /= 2;
+				//fOffsetY /= 2;
 				ArrayList<ArrayList<FracNode>> newfl;
 				newfl = new ArrayList<ArrayList<FracNode>>(iWidth);
 				for (int x=0;x<iWidth;x++){
@@ -223,7 +219,12 @@ public class FractaLand
 		}
 	}
 	private void addColAt(int index) {
-		ArrayList<FracNode> col = new ArrayList<FracNode>(Collections.nCopies(fl.size(), new FracNode(0d,0d,Color.BLUE,255)));
+		//ArrayList<FracNode> col = new ArrayList<FracNode>(Collections.nCopies(fl.size(), new FracNode(0d,0d,Color.BLUE,255)));
+		//fl.add(index, col);
+		ArrayList<FracNode> col = new ArrayList<FracNode>(fl.size());
+		for (int y=0;y<fl.size();y++) {
+			col.add(new FracNode(0d,0d,Color.BLUE,255));
+		}
 		fl.add(index, col);
 	}
 	private void removeColAt(int index) {
@@ -259,7 +260,7 @@ public class FractaLand
 				float y1 = ctrY + (y * fSpacing) + fOffsetY;
 				c.drawCircle(x1,y1,1.5f, paint);
 				// increment node alpha slowly
-				if(iAlpha<255) {node.setAlpha(iAlpha+2);}
+				if(iAlpha<254) {node.setAlpha(iAlpha+2);}
 			}
 		}		
 	}

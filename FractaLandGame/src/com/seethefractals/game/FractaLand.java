@@ -123,7 +123,7 @@ public class FractaLand
 		{
 			fIncrementMag = 0.2f; 
 			fDeltaMag = fDeltaMag - fIncrementMag;
-			fSpacing += fIncrementMag;
+			fSpacing += fIncrementMag;			
 			return;
 		} 
 
@@ -262,15 +262,22 @@ public class FractaLand
 			{
 				row = fl.get(x + iRadius);
 				node = (FracNode) row.get(y + iRadius);
-				iAlpha = node.getAlpha();
 				paint.setColor(node.getIter());
+				// increment node alphas while zooming
+				iAlpha = node.getAlpha();
+				if(fDeltaMag>1.0f){
+					if (iAlpha < 254){
+						node.setAlpha(iAlpha + 5);
+					}
+				}
 				paint.setAlpha(iAlpha);
 				float x1 = ctrX + (x * fSpacing) + fOffsetX;
 				float y1 = ctrY + (y * fSpacing) + fOffsetY;
 				c.drawCircle(x1, y1, 1.5f, paint);
-				// increment node alpha slowly
-				if (iAlpha < 254)
-				{node.setAlpha(iAlpha + 2);}
+				
+				
+				
+				
 			}
 		}		
 	}

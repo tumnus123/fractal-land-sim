@@ -264,7 +264,7 @@ public class FractaLand
 				row = fl.get(x + iRadius);
 				node = (FracNode) row.get(y + iRadius);
 				paint.setColor(node.getIter());
-// increment node alphas while zooming
+				// increment node alphas while zooming
 				iAlpha = node.getAlpha();
 				if(fDeltaMag>1.0f){
 					if (iAlpha < 250){

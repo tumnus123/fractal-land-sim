@@ -253,17 +253,20 @@ public class FractaLand
 		c.drawLine(ctrX - 5, ctrY, ctrX + 5, ctrY, paint);
 		c.drawLine(ctrX, ctrY - 5, ctrX, ctrY + 5, paint);
 
-// draw the FracNodes centered at 0,0
+		// draw the FracNodes centered at 0,0
 		ArrayList row;
 		FracNode node;
 		int iAlpha;
+		int iter;
 		for (int x=iRadius * -1;x <= iRadius;x++)
 		{
 			for (int y=iRadius * -1;y <= iRadius;y++)
 			{
 				row = fl.get(x + iRadius);
 				node = (FracNode) row.get(y + iRadius);
-				paint.setColor(node.getIter());
+				iter = node.getIter();
+				paint.setColor(Color.argb(0,iter,iter,iter));
+				// paint.setColor(node.getIter());
 				// increment node alphas while zooming
 				iAlpha = node.getAlpha();
 				if(fDeltaMag>1.0f){
@@ -282,15 +285,20 @@ public class FractaLand
 	}
 
 	private FracNode calcIter(FracNode node) {
-		
-		int iterMax = 300;
+		int MAX = 255; // TODO: make dynamic
+		double px = node.getX();
+		double py = node.getY();
 		double zx = 0.0, zy = 0.0;
 		double zx2 = 0.0, zy2 = 0.0;
-		int iter = 0;
-		while (iter < iterMax && zx2 + zy2 < 4.0) {
-				
-		}	
-
+		int value = 0;
+		while (value < MAX && zx2 + zy2 < 4.0) {
+			zy = 2.0 * zx * zy + py;
+			zx = zx2 - zy2 + px;
+			zx2 = zx * zx;
+			zy2 = zy * zy;
+			value++;
+		}
+		node.setIter(value);
 		return node;
 	}
 

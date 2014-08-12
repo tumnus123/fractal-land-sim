@@ -21,6 +21,25 @@ public class FracNode
 		this.iIter = iIter;
 		this.iAlpha = iAlpha;
 	}
+	
+	private void calcIter()
+	{
+		int MAX = 255; // TODO: make dynamic
+		double px = this.dX;
+		double py = this.dY;
+		double zx = 0.0, zy = 0.0;
+		double zx2 = 0.0, zy2 = 0.0;
+		int value = 0;
+		while (value < MAX && zx2 + zy2 < 4.0)
+		{
+			zy = 2.0 * zx * zy + py;
+			zx = zx2 - zy2 + px;
+			zx2 = zx * zx;
+			zy2 = zy * zy;
+			value++;
+		}
+		this.iIter = value;
+	}
 
 	public void setAlpha(int iAlpha)
 	{
